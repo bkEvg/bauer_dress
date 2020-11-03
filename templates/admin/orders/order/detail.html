@@ -1,0 +1,112 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" />
+{% endblock %}
+{% block title %}
+    Заказ {{ order.id }}
+{% endblock %}
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">Начало</a> &rsaquo;
+        <a href="{% url 'admin:orders_order_changelist' %}">Заказы</a>
+        &rsaquo;
+        <a href="{% url 'admin:orders_order_change' order.id %}">Заказ {{ order.id }}</a>
+        &rsaquo; Детали
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Заказ {{ order.id }}</h1>
+    <ul class="object-tools">
+        <li>
+            <a href="#" onclick="window.print();">Распечатать Заказ</a>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <th>Создан</th>
+            <td>{{ order.created }}</td>
+        </tr>
+        <tr>
+            <th>Покупатель</th>
+            <td>{{ order.first_name }} {{ order.last_name }}</td>
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
+        </tr>
+        <tr>
+            <th>Телефон</th>
+            <td><a href="tel:{{ order.phone }}">{{ order.phone }}</a></td>
+        </tr>
+        <tr>
+            <th>Адрес</th>
+            <td>{{ order.address }}</td>
+        </tr>
+        <tr>
+            <th>Тип доставки</th>
+            <td>{% if order.dilivery_method == '1' %}Самовывоз {% elif order.dilivery_method == '2' %}Почта России (270 руб.) {% elif order.dilivery_method == '3' %}Бесплатная доставка по Нск (в 10 км) {% elif order.dilivery_method == '4' %}Курьер по Нск не дальше 30км (350 руб.) {% else %}Что-то непонятное {% endif %}</td>
+        </tr>
+        <tr>
+            <th>Товара на сумму</th>
+            <td>{{ order.get_total_cost }}</td>
+        </tr>
+        <tr>
+            <th>Статус</th>
+            <td>{% if order.paid %}<span style="color: green;">Оплачено</span>{% else %}В процессе оплаты{% endif %}</td>
+        </tr>
+    </table>
+    <div class="module">
+        <div class="tabular inline-related last-related">
+            <table>
+                <h2>Товары</h2>
+                <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Размер</th>
+                    <th>Цвет</th>
+                    <th>Итого</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in order.items.all %}
+                    <tr class="row{% cycle '1' '2' %}">
+                        <td>{{ item.product.name }}{% if item.product.rent %} (аренда){% endif %}</td>
+                        <td class="num">{{ item.price }}{% if item.product.rent %} руб/{% if item.product.pay_method %}{{ item.product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</td>
+                        <td class="num">{{ item.quantity }}</td>
+                        {% autoescape off %}
+                            <td class="num">{{ item.size }}</td>
+                            <td class="num">{{ item.color }}</td>
+                        {% endautoescape %}
+                        <td class="num">{{ item.get_cost }} Р</td>
+                    </tr>
+                {% endfor %}
+                {% if order.coupon %}
+                <tr class="coupon">
+                    <td colspan="3">Купон ({{ order.coupon.code }}) {% if order.coupon.discount.is_percentage %} -{{ order.coupon.discount.value }}%{% else %} -{{ order.coupon.discount.value }} руб.{% endif %}</td>
+                </tr>
+                {% endif %}
+                
+                <tr class="total">
+                    <td colspan="1"><strong>Доставка:</strong></td>
+                    {% if order.dilivery_method == '1' %}
+                        <td colspan="3">Самовывоз</td>
+                    {% elif order.dilivery_method == '3' %}
+                        <td colspan="3">Бесплатно</td>
+                    {% elif order.dilivery_method == '4' %}
+                        <td colspan="3">Курьер (350 руб.)</td>
+                    {% else %}
+                        <td colspan="3">Почта (270.00 Р) </td>
+                    {% endif %}
+                </tr>
+                <tr class="total">
+                    <td colspan="3"><strong>К оплате</strong></td>
+                    <td class="num"><strong>{{ order.get_total }} руб.</strong></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'shop/product/list_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block seo %} 
+<title>Аренда платьев | Bauer Dress</title>
+<meta name="description" content="Аренда платьев для девочек с бесплатной доставкой по Новосибирску. Онлайн магазин детской одежды"/>
+{% endblock %}
+
+{% block hero %}
+  <div class="col-lg-6">
+    <h1 class="h2 text-uppercase mb-0">Аренда платьев</h1>
+  </div>
+  <div class="col-lg-6 text-lg-right">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
+        <li class="breadcrumb-item"><a href="{% url 'shop:main' %}">Главная</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Магазин</li>
+      </ol>
+    </nav>
+  </div>
+{% endblock %}

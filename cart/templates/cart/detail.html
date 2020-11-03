@@ -1,0 +1,169 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block seo %}
+    <title>Корзина | Bauer Dress</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- HERO SECTION-->
+        <section class="bg-light" style="padding-top: 3em;">
+          <div class="container">
+            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+              <div class="col-lg-6">
+                <h1 class="h2 text-uppercase mb-0">Корзина</h1>
+              </div>
+              <div class="col-lg-6 text-lg-right">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
+                    <li class="breadcrumb-item"><a href="{% url 'shop:main' %}">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Корзина</li>
+                    <li class="breadcrumb-item"><a href="{% url 'orders:order_create' %}">Оформление</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Спасибо</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="py-5">
+          {% if not cart %}
+          <h2 class="h5 text-uppercase mb-4">Корзина товаров пуста</h2>
+          {% endif %}
+          <div class="row">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+              <!-- CART TABLE-->
+              {% if cart %}
+              <div class="table-responsive mb-4">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr>
+                      <th class="border-0" scope="col">
+                        <strong class="text-small text-uppercase">Товар</strong>
+                      </th>
+                      <th class="border-0" scope="col">
+                        <strong class="text-small text-uppercase" style="white-space: nowrap;">Кол-во
+                        </strong>
+                      </th>
+                      <th class="border-0" scope="col">
+                        <strong class="text-small text-uppercase">Цвет
+                        </strong>
+                      </th>
+                      <th class="border-0" scope="col">
+                        <strong class="text-small text-uppercase">Размер
+                        </strong>
+                      </th>
+                      <th class="border-0" scope="col">
+                        <strong class="text-small text-uppercase">Цена
+                        </strong>
+                      </th>
+                      <th class="border-0" scope="col">
+                        
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in cart %}
+                      {% with product=item.product %}
+                      <tr>
+                        <th class="pl-0 border-light" scope="row">
+                          <div class="media align-items-center">
+                            <a class="reset-anchor d-block animsition-link" href="{{ item.product_set.get_absolute_url }}">
+                              <img src="{% if product.images.first %}{{ product.images.first.image.url }}{% else %}{% static 'shop/img/product-banners/example.jpg' %} {% endif %}" alt="{{ product.images.first.alt }}" width="70"/>
+                            </a>
+                            <div class="media-body ml-3" style="min-width: 150px;">
+                              <strong class="h6"><a class="reset-anchor animsition-link" href="{{ item.product_set.get_absolute_url }}">{{ product.name }}</a></strong>
+                            </div>
+                          </div>
+                        </th>
+                        
+                        <td class="align-middle border-light">
+                          <p class="mb-0 small">{{ item.quantity }}</p>
+                        </td>
+                        <td class="align-middle border-light">
+                          <p class="mb-0 small">{{ item.color }}</p>
+                        </td>
+                        <td class="align-middle border-light">
+                          <p class="mb-0 small">{{ item.product_set.size_set }}</p>
+                        </td>
+                        <td class="align-middle border-light">
+                          <p class="mb-0 small" style="white-space: nowrap;">{{ item.total_price|floatformat:'2' }}{% if product.rent %} руб/{% if product.pay_method %}{{ product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</p>
+                        </td>
+                        <td class="align-middle border-light">
+                          <a class="reset-anchor" href="{% url 'cart:cart_remove' product.id item.product_set.price item.color item.quantity item.product_set.slug %}"><i class="fas fa-trash-alt small text-muted"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      {% endwith %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- CART NAV-->
+              <div class="bg-light px-4 py-3">
+                <div class="row align-items-center text-center">
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-left">
+                    <a class="btn btn-link p-0 text-dark btn-sm" href="{{ request.META.HTTP_REFERER }}">
+                      <i class="fas fa-long-arrow-alt-left mr-2"> </i>Назад
+                    </a>
+                    </div>
+                  <div class="col-md-6 text-md-right">
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'orders:order_create' %}">Продолжить<i class="fas fa-long-arrow-alt-right ml-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <!-- CART NAV-->
+              <div class="bg-light px-4 py-3">
+                <div class="row align-items-center text-center">
+                  <div class="mb-3 mb-md-0 text-md-left" style="padding-left: 5px;white-space: nowrap;">
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'shop:index' %}"><i class="fas fa-long-arrow-alt-left mr-2"></i>Назад
+                    </a>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            <!-- ORDER TOTAL-->
+            {% if cart %}
+            <div class="col-lg-4">
+              <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                <div class="card-body">
+                  <h5 class="text-uppercase mb-4">К оплате</h5>
+                  <ul class="list-unstyled mb-0">
+                    {% if cart.coupon %}
+                    <li class="d-flex align-items-center justify-content-between">
+                      <div>
+                        <a class="reset-anchor mr-2" href="{% url 'cart:clear_coupon' %}"><i class="fas fa-trash-alt small text-muted"></i></a>
+                        <strong class="text-uppercase small font-weight-bold">Купон</strong>
+                        <span class="text-small text-muted">({{ cart.coupon.code }})</span>
+                      </div>
+                      <span class="text-muted small">
+                        - {% if cart.coupon.discount.is_percentage %}{{ cart.coupon.discount.value }}%{% else %}{{ cart.coupon.discount.value }} руб.{% endif %}
+                      </span>
+                    </li>
+                    {% endif %}
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Итого</strong><span>{{ cart.get_total_price_after_discount|floatformat:'2' }} руб.</span></li>
+                    <li>
+                      <form method="POST" action="{% url 'coupons:apply' %}">
+                        {% csrf_token %}
+                        <div class="form-group mb-0">
+                          {% render_field coupon_apply_form.code class="form-control" placeholder="Введите Купон" %}
+                          <button class="btn btn-dark btn-sm btn-block" type="submit">
+                            <i class="fas fa-gift mr-2"></i>Применить
+                          </button>
+                        </div>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            {% endif %}
+          </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+{% block seo %}
+    <title>Bauer Dress | Часто задаваемые вопросы</title>
+    <meta name="description" content="Онлайн магазин детской одежды. Ответы на самые часто задаваемые вопросы"/>
+{% endblock %}
+{% block content %}
+<main class="main-content-wrapper">
+    <div class="error-area pt--90 pt-xl--70 pb--120 pb-xl--100 pb-lg--95 pb-sm--90">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8 text-center">
+                    <div class="information">
+                        <h2 class="mt-5">Часто задаваемые вопросы</h2>
+                        {% for question in questions %}
+                        <div class="card mb-5 mt-5">
+                          
+                          {% if user.is_staff %}
+                          <div class="card-header text-left" style="display: flex;justify-content: space-between;align-items: baseline;">
+                            <a class="btn btn-outline-info" href="{% url 'info:faq-update' question.id %}">Редактировать</a>
+                          </div>
+                          {% endif %}
+                          <div class="card-body text-left">
+                            <blockquote class="blockquote mb-0">
+                              <p>{{ question.question }}</p>
+                              <footer class="blockquote-footer">
+                                <cite>{{ question.response }}</cite>
+                            </footer>
+                            </blockquote>
+                          </div>
+                          {% if user.is_staff %}
+                          <a class="btn btn-danger" href="{% url 'info:faq-delete' question.id %}">Удалить</a>
+                          {% endif %}
+                        </div>
+                        {% empty %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

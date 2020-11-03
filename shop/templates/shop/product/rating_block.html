@@ -1,0 +1,43 @@
+{% if product.get_rating_tag == 'zero' %}
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+{% elif product.get_rating_tag == 'one' %}
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+    <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+{% elif product.get_rating_tag == 'two' %}
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+    <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+{% elif product.get_rating_tag == 'three' %}
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+ {% elif product.get_rating_tag == 'four' %}
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+{% elif product.get_rating_tag == 'five' %}
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+{% else %}
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+  <li class="list-inline-item m-0"><i class="far fa-star small text-warning"></i></li>
+{% endif %}
