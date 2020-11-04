@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Promotion, PromoProduct, FirstPage, SecondPage, \
-	ThirdPage, TopProducts, ServicePage, SubPage
+	ThirdPage, ServicePage, SubPage
 
 
 class PromoProductInline(admin.TabularInline):
@@ -40,13 +40,13 @@ class SubPageAdmin(admin.ModelAdmin):
 admin.site.register(SubPage, SubPageAdmin)
 
 
-class ThirdPageInline(admin.TabularInline):
-	fk_name = 'page'
-	model = TopProducts
+# class ThirdPageInline(admin.TabularInline):
+# 	fk_name = 'page'
+# 	model = TopProducts
 
 
-class ThirdPageAdmin(admin.ModelAdmin):
-	list_display = ['name']
-	search_fields = ['name']
-	inlines = [ThirdPageInline]
-admin.site.register(ThirdPage, ThirdPageAdmin)
+# class ThirdPageAdmin(admin.ModelAdmin):
+# 	list_display = ['name']
+# 	search_fields = ['name']
+# 	inlines = [ThirdPageInline]
+# admin.site.register(ThirdPage, ThirdPageAdmin)

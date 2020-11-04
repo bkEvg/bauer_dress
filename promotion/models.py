@@ -142,9 +142,9 @@ class SubPage(models.Model):
 
 
 
-class TopProducts(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-	page = models.ForeignKey(ThirdPage, on_delete=models.CASCADE, related_name='products')
+# class TopProducts(models.Model):
+# 	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+# 	page = models.ForeignKey(ThirdPage, on_delete=models.CASCADE, related_name='products')
 
 
 

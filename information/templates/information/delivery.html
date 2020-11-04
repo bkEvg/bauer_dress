@@ -10,10 +10,10 @@
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8 text-left">
                     <div class="information mt-5 mb-5" style="padding-bottom: 100px;">
-                        <h2>Доставка</h2>
-                        <p>
-                            По Новосибирску от центра 10 км - бесплатно, далее но не более 30 км - курьер 350р, почта России - 270р.                             
-                        </p>
+                        {% autoescape off %}
+                        <h2>{{ del.title }}</h2>
+                        {{ del.content }}
+                        {% endautoescape %}
                     </div>
                 </div>
             </div>

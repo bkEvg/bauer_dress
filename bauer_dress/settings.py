@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django_filters',
     'email_sub.apps.EmailSubConfig',
     'django_simple_coupons',
+    'ckeditor',
 
     'allauth',
     'allauth.account',

@@ -9,16 +9,10 @@
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8 text-left">
                     <div class="information mt-5 mb-5">
-                        <h2>Помощь</h2>
-                        <p>
-                            Если у вас что-то не так с товаром, мы готовы помочь вам в любой ситуации, главное напишите или позвоните нам.<br>
-                            Текстильные изделия возврату не подлежат.<br>
-                            Контакты:<br>
-                            <a href="https://www.instagram.com/bauerdress/" target="_blank">Instagram</a><br>
-                            <a href="tel:+89833022013">+8 (983) 302-20-13</a><br>
-                            <a href="tel:+89833113436">+8 (983) 311-34-36</a><br>
-                            <a href="mailto:bauergallla@gmail.com">bauergallla@gmail.com</a><br>
-                        <p/>
+                        {% autoescape off %}
+                            <h2>{{ help.title }}</h2>
+                            {{ help.content }}
+                        {% endautoescape %}
                     </div>
                 </div>
             </div>

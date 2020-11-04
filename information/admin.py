@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import OftenQuestion, Question
+from .models import OftenQuestion, Question, Help, Privacy, Delivery, About
 from django.urls import reverse
 from django.utils.html import format_html
 from django.core.mail import send_mail
@@ -34,3 +34,8 @@ class QuestionAdmin(admin.ModelAdmin):
 	list_display = ['email', 'name', 'question', response]
 	actions = [send_responses]
 admin.site.register(Question, QuestionAdmin)
+
+admin.site.register(Help)
+admin.site.register(Privacy)
+admin.site.register(About)
+admin.site.register(Delivery)

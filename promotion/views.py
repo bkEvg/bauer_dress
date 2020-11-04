@@ -41,43 +41,6 @@ def promo_products(request, slug):
 		'filter': f
 	})
 
-def promo_sort_to_expensive(request, slug=None):
-	pass
-	# promotion = get_object_or_404(Promotion, slug=slug)
-	# products= Product.objects.filter(stock__gt=0, promo__promotion=promotion).order_by('-price')
-	# f = ListFilterForm(request.GET, queryset=products)
-
-
-
-	# paginator = Paginator(f.qs, 12)
-	# page_number = request.GET.get('page')
-	# page_obj = paginator.get_page(page_number)
-
-	# return render(request, 'shop/product/list_shop.html', {
-	# 	'promotion': promotion,
-	# 	'products': products,
-	# 	'page_obj': page_obj,
-	# 	'filter': f,
-	# })
-
-def promo_sort_to_cheap(request, slug=None):
-	pass
-	# promotion = get_object_or_404(Promotion, slug=slug)
-	# products= Product.objects.filter(stock__gt=0, promo__promotion=promotion).order_by('price')
-	# f = ListFilterForm(request.GET, queryset=products)
-
-
-
-	# paginator = Paginator(f.qs, 12)
-	# page_number = request.GET.get('page')
-	# page_obj = paginator.get_page(page_number)
-
-	# return render(request, 'shop/product/list_shop.html', {
-	# 	'promotion': promotion,
-	# 	'products': products,
-	# 	'page_obj': page_obj,
-	# 	'filter': f,
-	# })
 
 @require_POST
 def sub(request):

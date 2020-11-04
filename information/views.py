@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import OftenQuestion, Question
+from .models import OftenQuestion, Question, Delivery, Help, Privacy, About
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -14,19 +14,20 @@ from django.contrib import messages
 
 
 def privacy(request):
-	return render(request, 'information/privacy.html')
+	privacy = Privacy.objects.filter(content__isnull=False).last()
+	return render(request, 'information/privacy.html', {'privacy': privacy})
 
 def help_page(request):
-	return render(request, 'information/help_page.html')
-
-def rules(request):
-	return render(request, 'information/rules.html')
+	help = Help.objects.filter(title__isnull=False, content__isnull=False).last()
+	return render(request, 'information/help_page.html', {'help': help})
 
 def about(request):
-	return render(request, 'information/about.html')
+	about = About.objects.filter(title__isnull=False, content__isnull=False).last()
+	return render(request, 'information/about.html', {"about": about})
 
 def delivery(request):
-	return render(request, 'information/delivery.html')
+	delivery = Delivery.objects.filter(title__isnull=False, content__isnull=False).last()
+	return render(request, 'information/delivery.html', {'del': delivery})
 
 
 
@@ -46,36 +47,6 @@ class QuestionCreateView(SuccessMessageMixin, generic.CreateView):
 	success_url = '/'
 	success_message = "Ваш вопрос отправлен администрации магазина!"
 
-
-class QuestionUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, 
-																	generic.UpdateView):
-	model = OftenQuestion
-	fields = ['name', 'question', 'response']
-	template_name = 'information/question_form_update.html'
-	success_url = '/info/FAQ'
-	success_message = "Вопрос отредактирован!"
-
-
-	def test_func(self):
-		if self.request.user.is_staff:
-			return True
-		else:
-			return False
-
-
-
-class QuestionDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, 
-																	generic.DeleteView):
-	model = OftenQuestion
-	success_url = '/info/FAQ'
-	success_message = "Вопрос удален!"
-
-
-	def test_func(self):
-		if self.request.user.is_staff:
-			return True
-		else:
-			return False
 
 @staff_member_required
 def answerQuestion(request, question_id):

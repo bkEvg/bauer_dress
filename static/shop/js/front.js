@@ -13,15 +13,27 @@ $(function () {
     /* ===============================================================
          PRODUCT SLIDER
       =============================================================== */
-    $('.product-slider').owlCarousel({
-        items: 1,
-        thumbs: true,
-        thumbImage: false,
-        thumbsPrerendered: true,
-        autoHeight:true,
-        thumbContainerClass: 'owl-thumbs',
-        thumbItemClass: 'owl-thumb-item'
-    });
+      $('.owl-carousel-product').owlCarousel({
+          loop:true,
+          margin:10,
+          responsiveClass:true,
+          lazyLoad:true,
+          responsive:{
+              0:{
+                  items:1,
+                  nav:false
+              },
+              600:{
+                  items:1,
+                  nav:false
+              },
+              1000:{
+                  items:1,
+                  nav:false,
+                  loop:false
+              }
+          }
+      });
 
 
     /* ===============================================================
@@ -60,9 +72,32 @@ $(function () {
 
 
 
-$('.owl-carousel').owlCarousel({
+$('.size-slider').owlCarousel({
     margin:8,
     loop:false,
     autoWidth:true,
     items:4
-})
+});
+
+
+
+// $('.owl-carousel-product').owlCarousel({
+//     loop:true,
+//     margin:10,
+//     responsiveClass:true,
+//     responsive:{
+//         0:{
+//             items:1,
+//             nav:false
+//         },
+//         600:{
+//             items:1,
+//             nav:false
+//         },
+//         1000:{
+//             items:1,
+//             nav:false,
+//             loop:false
+//         }
+//     }
+// });

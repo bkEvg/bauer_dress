@@ -13,23 +13,18 @@
                         <h2 class="mt-5">Часто задаваемые вопросы</h2>
                         {% for question in questions %}
                         <div class="card mb-5 mt-5">
-                          
-                          {% if user.is_staff %}
-                          <div class="card-header text-left" style="display: flex;justify-content: space-between;align-items: baseline;">
-                            <a class="btn btn-outline-info" href="{% url 'info:faq-update' question.id %}">Редактировать</a>
-                          </div>
-                          {% endif %}
                           <div class="card-body text-left">
                             <blockquote class="blockquote mb-0">
-                              <p>{{ question.question }}</p>
-                              <footer class="blockquote-footer">
-                                <cite>{{ question.response }}</cite>
+                              {% autoescape off %}
+                                {{ question.question }}
+                              {% endautoescape %}
+                              <footer class="blockquote-footer mt-3">
+                                {% autoescape off %}
+                                  {{ question.response }}
+                                {% endautoescape %}
                             </footer>
                             </blockquote>
                           </div>
-                          {% if user.is_staff %}
-                          <a class="btn btn-danger" href="{% url 'info:faq-delete' question.id %}">Удалить</a>
-                          {% endif %}
                         </div>
                         {% empty %}
                         {% endfor %}
