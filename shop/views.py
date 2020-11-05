@@ -16,34 +16,13 @@ from django.views.decorators.http import require_POST
 
 
 
-
-def create_sizes(from_int, to):
-	counter = 0
-	to_in = to + 1
-	for i in range(from_int, to_in):
-		Size.objects.create(name='{}'.format(i))
-		counter+=1
-	print(counter)
-	return 'ok'
-
-
-def del_sizes(from_int, to):
-	counter = 0
-	to_in = to + 1
-	for i in range(from_int, to_in):
-		Size.objects.filter(name='{}'.format(i)).delete()
-		counter+=1
-	print(counter)
-	return 'ok'
-
-
 def product_detail(request, id, slug, category_slug):
 	product = get_object_or_404(Product, id=id, slug=slug, stock__gt=0)
 	cart_product_form = CartAddProductForm()
 	review_form = ReviewForm()
 	response_form = ReviewResponseForm()
 	category = get_object_or_404(Category, slug=category_slug)
-	products_with_category_exclude = Product.objects.filter(category=category).exclude(id=product.id)[:5]
+	products_with_category_exclude = Product.objects.filter(category=category).exclude(id=product.id)[:4]
 	if products_with_category_exclude.count() <= 1:
 		products_with_category_exclude = None
 	

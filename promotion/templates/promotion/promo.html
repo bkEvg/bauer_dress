@@ -72,7 +72,7 @@
                       </a>
                     </div>
                     <h6> <a class="reset-anchor" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
-                    <p class="small text-muted">{{ product.get_price|floatformat:'2' }} руб.</p>
+                    <p class="small text-muted">от {{ product.price_from }}{% if product.rent %} руб/{% if product.pay_method %}{{ product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</p>
                   </div>
                 </div>
             {% empty %}

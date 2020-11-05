@@ -112,8 +112,6 @@ class Product(models.Model):
 		help_text='То как этот товар будет отображен в URL.')
 	description = models.TextField(default='Full description of product',blank=False, null=True, verbose_name=u"Описание",
 		help_text='Добавьте полное описание товара, без характеристик.')
-	short_description = models.CharField(default='Short description of product', max_length=100, verbose_name=u"Краткое описание", blank=False, null=True,
-		help_text='Краткое описание, 3-4 слова.')
 	product_model = models.ForeignKey(Model, on_delete=models.CASCADE, null=True, verbose_name='Модель изделия')
 	product_composition = models.CharField(max_length=150, blank=False, null=True, verbose_name='Состав изделия')
 	material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True, verbose_name=u"Материал")
