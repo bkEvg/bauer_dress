@@ -227,3 +227,4 @@ dmypy.json
 # profiling data
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,python,django
+db.sqlite3
