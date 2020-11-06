@@ -6,7 +6,7 @@ from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from shop.models import Product
 from django.contrib.admin.views.decorators import staff_member_required
-from coupons.forms import CouponApplyForm
+from django_simple_coupons.forms import CouponApplyForm
 import weasyprint
 from django.template import loader
 from django.core.mail import send_mail

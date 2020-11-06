@@ -205,6 +205,10 @@ class SizeSet(models.Model):
 
 	def __str__(self):
 		return '{0}-{1}'.format(self.sizes.filter().first(), self.sizes.filter().last())
+	
+	class Meta:
+		verbose_name = 'сет размеров'
+		verbose_name_plural = 'сеты размеров'
 
 
 class Size(models.Model):

@@ -4,7 +4,7 @@ from .forms import CartAddProductForm
 from shop.models import Product, ProductSet
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from coupons.forms import CouponApplyForm
+from django_simple_coupons.forms import CouponApplyForm
 from wishlist.models import Wishlist, WishlistItem
 from django.core.exceptions import ObjectDoesNotExist
 

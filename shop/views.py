@@ -6,7 +6,6 @@ from django.utils import timezone
 from cart.forms import CartAddProductForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
-# from .models import ReviewForm, Size, ReviewResponse, Tag, ProductSet, SizeSet
 from .forms import ListFilterForm, ReviewResponseForm, ForRentFilterForm
 from promotion.models import Promotion
 from django.core.exceptions import ObjectDoesNotExist
