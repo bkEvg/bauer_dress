@@ -8,6 +8,7 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 from decimal import Decimal
+from ckeditor.fields import RichTextField
 
 
 class SeoModel(models.Model):
@@ -110,7 +111,7 @@ class Product(models.Model):
 	name = models.CharField(max_length=200, db_index=True, verbose_name=u"Название")
 	slug = models.SlugField(max_length=200, db_index=True, verbose_name=u"Артикул (лат.)", 
 		help_text='То как этот товар будет отображен в URL.')
-	description = models.TextField(default='Full description of product',blank=False, null=True, verbose_name=u"Описание",
+	description = RichTextField(default='Full description of product', blank=False, null=True, verbose_name=u"Описание",
 		help_text='Добавьте полное описание товара, без характеристик.')
 	product_model = models.ForeignKey(Model, on_delete=models.CASCADE, null=True, verbose_name='Модель изделия')
 	product_composition = models.CharField(max_length=150, blank=False, null=True, verbose_name='Состав изделия')
@@ -212,7 +213,7 @@ class SizeSet(models.Model):
 
 
 class Size(models.Model):
-	size = models.CharField(max_length=4, null=True)
+	size = models.CharField(max_length=50, null=True)
 	size_set = models.ForeignKey(SizeSet, on_delete=models.CASCADE, null=True, related_name='sizes')
 
 	def __str__(self):
@@ -240,7 +241,7 @@ class ProductSet(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sets')
 	size_set = models.ForeignKey(SizeSet, on_delete=models.SET_NULL, null=True, related_name='size_set')
 	price = models.DecimalField(max_digits=10, decimal_places=2, blank=False, verbose_name=u"Цена")
-	slug = models.SlugField(max_length=200, unique=True, db_index=True)
+	slug = models.SlugField(max_length=300, unique=True, db_index=True)
 
 	class Meta:
 		verbose_name = 'сет товара'

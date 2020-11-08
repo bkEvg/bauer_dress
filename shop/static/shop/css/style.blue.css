@@ -159,8 +159,6 @@ button:focus, button:active {
 *
 */
 .product img {
-  -webkit-filter: grayscale(40%);
-  filter: grayscale(40%);
   transition: all 0.3s;
 }
 
