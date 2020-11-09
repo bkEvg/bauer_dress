@@ -460,6 +460,7 @@
                       </div>
                 </form>
                 {% else %}
+                <p class="form-group"><a href="{% url 'account_login' %}">Войдите</a>, чтобы оставить отзыв</p>
                 {% endif %}
                 <div class="mt-5">
                 {% for review in product.reviews.all %}

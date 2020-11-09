@@ -138,3 +138,7 @@
     color: #222 !important;
     transition: ease all .3s;
 }
+
+.bg-color {
+    background-color: #f5f5f5;
+}
