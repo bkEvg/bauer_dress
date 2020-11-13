@@ -44,7 +44,7 @@ button:focus, button:active {
   border-top: 2px solid #2b90d9;
 }
 
-.navbar .dropdown-menu::before {
+/*.navbar .dropdown-menu::before {
   content: '';
   display: block;
   border-left: 0.5rem solid transparent;
@@ -53,7 +53,7 @@ button:focus, button:active {
   position: absolute;
   top: -0.5rem;
   left: 1rem;
-}
+}*/
 
 @media (min-width: 992px) {
   .navbar-brand {
@@ -135,15 +135,15 @@ button:focus, button:active {
 .category-item-title {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: #fff;
+  /*background: #fff;*/
   text-transform: uppercase;
   letter-spacing: 0.07em;
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.07);
+  /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.07);*/
   font-size: 0.8rem;
   text-align: center;
 }
