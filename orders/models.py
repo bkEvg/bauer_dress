@@ -1,4 +1,3 @@
-from phonenumber_field.modelfields import PhoneNumberField
 from django.db import models
 from shop.models import Product, ProductSet
 from django import forms
