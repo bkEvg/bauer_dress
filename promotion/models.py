@@ -50,29 +50,16 @@ class SecondPage(models.Model):
 
 	first_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_no_1')
 	image_for_first_cat = models.ImageField(upload_to='promo/second_page/first_category/images', verbose_name='Фото категории', 
-		help_text='Левая колонка 750x1050')
+		help_text='Левая колонка 1125x1050')
 	alt_for_image_no_1 = models.CharField('Описание картинки 1', max_length=100, blank=False, null=True)
-
+	text = models.CharField("Текст над картинкой", max_length = 150, blank=False, null=True)
+	
 
 	second_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_no_2')
 	image_for_second_cat = models.ImageField(upload_to='promo/second_page/second_category/images', verbose_name='Фото категории',
-		help_text='Центральная колонка, верх 750x500')
+		help_text='Правая колонка 1125x1050')
 	alt_for_image_no_2 = models.CharField('Описание картинки 2', max_length=100, blank=False, null=True)
-
-
-	third_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_no_3')
-	image_for_third_cat = models.ImageField(upload_to='promo/second_page/third_category/images', verbose_name='Фото категории',
-		help_text='Центральная колонка, низ 750x500')
-	alt_for_image_no_3 = models.CharField('Описание картинки 3', max_length=100, blank=False, null=True)
-
-
-
-	fourth_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_no_4')
-	image_for_fourth_cat = models.ImageField(upload_to='promo/second_page/fourth_category/images', verbose_name='Фото категории', 
-		help_text='Правая колонка 750x1050')
-	alt_for_image_no_4 = models.CharField('Описание картинки 4', max_length=100, blank=False, null=True)
-
-
+	text_no_2 = models.CharField("Текст над картинкой", max_length = 150, blank=False, null=True)
 
 	class Meta:
 		verbose_name = 'Вторая страница'
@@ -158,6 +145,8 @@ class Promotion(SeoPromotion):
 	service_page = models.ForeignKey(ServicePage, verbose_name='Экран услуг', on_delete=models.SET_NULL, null=True, related_name='service')
 	sub_page = models.ForeignKey(SubPage, verbose_name='Экран подписки', on_delete=models.SET_NULL, null=True)
 	is_main = models.BooleanField('Главный', default=False)
+	video = models.FileField(upload_to='video/', blank=True, null=True)
+	
 
 	def get_absolute_url(self):
 		return reverse('promo:exact_promo', kwargs={'slug': self.slug})

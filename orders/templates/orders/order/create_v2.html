@@ -133,18 +133,18 @@
                             </div>
                         {% endfor %}
                     {% else %}
-                        <div class="form-group">
+                        <div class="">
           								<select class="form-control custom-select is-invalid" id="id_dilivery_method" style="font-size: 16px;" name="dilivery_method">
-          								    <option selected>Выберите...</option>
-          								    <option value="1">Самовывоз</option>
-          								    <option value="2">Почтой (300 руб.)</option>
-          								    <option value="3">Доставка по Нск (бесплатно)</option>
-                              <option value="4">Курьер по Нск (350 руб.)*</option>
+                            <option selected>Выберите...</option>
+                            <option value="1">Самовывоз</option>
+                            <option value="2">Почтой (270 руб.)</option>
+                            <option value="3">Доставка по Нск (бесплатно)*</option>
+                            <option value="4">Курьер по Нск (350 руб.)*</option>
           								</select>
           							</div>
                     {% endif %}
                 {% else %}
-                    <div class="form-group">
+                    <div class="">
         							<select class="custom-select form-control" id="id_dilivery_method" style="font-size: 16px;" name="dilivery_method">
         							    <option selected>Выберите...</option>
         							    <option value="1">Самовывоз</option>
@@ -154,7 +154,24 @@
         							</select>
         						</div>
                 {% endif %}  
-              </div>            
+              </div>
+              <div class="col-lg-12 form-group">
+                <label class="text-small text-uppercase" for="{{ field.id_for_label }}">Мерки</label>
+                {% if form.is_bound %}
+                    {% if field.errors %}
+                        {% render_field form.comment class="form-control form-control-lg is-invalid" placeholder="Рост-175, грудь-80" %}
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.comment class="form-control form-control-lg is-valid" placeholder="Рост-175, грудь-80" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.comment class="form-control form-control-lg " placeholder="Рост-175, грудь-80" %}
+                {% endif %}
+              </div>        
               <div class="col-lg-8 form-group">
                 <button class="btn btn-dark" type="submit">Оформить</button>
               </div>

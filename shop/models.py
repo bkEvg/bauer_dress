@@ -52,7 +52,6 @@ class Category(SeoModel):
 
 class Material(models.Model):
 	name = models.CharField('Материал', max_length=50)
-	description = models.CharField('Описание материала, возможно его плюсы минусы', max_length=250, blank=False, null=True)
 	slug = models.SlugField(max_length=200, unique=True, null=True, verbose_name=u"Название (лат.)")
 
 
@@ -68,21 +67,21 @@ class Material(models.Model):
 		return reverse('shop:index_by_material', kwargs={'material_slug': self.slug})
 
 
-class Model(models.Model):
-	name = models.CharField(max_length=50, blank=False, verbose_name='Модель изделия')
-	description = models.CharField('Описание модели, возможно даже его преимущества', max_length=250, blank=False, null=True)
-	slug = models.SlugField(max_length=200, db_index=True, unique=True, verbose_name=u"Название (лат.)")
+# class Model(models.Model):
+# 	name = models.CharField(max_length=50, blank=False, verbose_name='Модель изделия')
+# 	description = models.CharField('Описание модели, возможно даже его преимущества', max_length=250, blank=False, null=True)
+# 	slug = models.SlugField(max_length=200, db_index=True, unique=True, verbose_name=u"Название (лат.)")
 
 
-	def __str__(self):
-		return self.name
+# 	def __str__(self):
+# 		return self.name
 
-	class Meta:
-		verbose_name='модель изделия'
-		verbose_name_plural = 'модели изделий'
+# 	class Meta:
+# 		verbose_name='модель изделия'
+# 		verbose_name_plural = 'модели изделий'
 
-	def get_absolute_url(self):
-		return reverse('shop:index_by_model', args=[self.slug])
+# 	def get_absolute_url(self):
+# 		return reverse('shop:index_by_model', args=[self.slug])
 
 
 class Tag(models.Model):
@@ -90,8 +89,8 @@ class Tag(models.Model):
 	slug = models.SlugField(max_length=200, db_index=True, unique=True, verbose_name=u"Название (лат.)")
 
 	class Meta:
-		verbose_name = 'тэг'
-		verbose_name_plural = 'тэги' 
+		verbose_name = 'возраст'
+		verbose_name_plural = 'возрасты' 
 
 	def __str__(self):
 		return self.name	
@@ -109,12 +108,10 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, related_name='products', 
 		on_delete=models.SET_NULL, null=True, verbose_name=u"Категория")
 	name = models.CharField(max_length=200, db_index=True, verbose_name=u"Название")
-	slug = models.SlugField(max_length=200, db_index=True, verbose_name=u"Артикул (лат.)", 
+	slug = models.SlugField(max_length=200, db_index=True, verbose_name=u"URL", 
 		help_text='То как этот товар будет отображен в URL.')
 	description = RichTextField(default='Full description of product', blank=False, null=True, verbose_name=u"Описание",
 		help_text='Добавьте полное описание товара, без характеристик.')
-	product_model = models.ForeignKey(Model, on_delete=models.CASCADE, null=True, verbose_name='Модель изделия')
-	product_composition = models.CharField(max_length=150, blank=False, null=True, verbose_name='Состав изделия')
 	material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True, verbose_name=u"Материал")
 	price_from = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=u"Цена от", blank=False, null=True)
 	price_to = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=u"Цена до", blank=False, null=True)
@@ -122,13 +119,10 @@ class Product(models.Model):
 	can_spend = models.BooleanField(default=False, verbose_name=u"Вычитать со склада")
 	created = models.DateTimeField(auto_now_add=True, verbose_name=u"Создан")
 	updated = models.DateTimeField(auto_now=True, verbose_name=u"Обновлен")
-	tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True, verbose_name='Тэг')
+	tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True, verbose_name='Возраст')
 	rent = models.BooleanField("Доступно в аренду (если да, заполни ниже)", default=False)
 	pay_method = models.CharField("Если аренда, то какая оплата?", blank=True, null=True, max_length=3, help_text='Если почасовая-ч, по дням-д, неделям-нед.')
-	# discount = models.IntegerField(default=0, blank=True,
- #                                    validators=[MinValueValidator(0),
- #                                                MaxValueValidator(100)],
- #                                                verbose_name='Скидка (%)')
+
 	
 	def __str__(self):
 		return self.name

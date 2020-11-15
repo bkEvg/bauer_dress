@@ -44,7 +44,7 @@
                 {% endfor %}
               </div>
             {% endif %}
-            <p data-toggle="modal" data-target=".bd-example-modal-lg" class="size-table d-inline">Таблица размеров</p>
+            <p data-toggle="modal" data-target=".bd-example-modal-lg" class="size-table d-inline">Таблица размеров</p><span class="text-muted">*</span>
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                   <div class="modal-content">
@@ -385,6 +385,9 @@
                   <strong class="text-uppercase text-dark">Тэг:</strong>
                     <a class="reset-anchor ml-2" href="{{ product.tag.get_absolute_url }}">{{ product.tag.name }}</a>
                 </li>
+                <li>
+                  <p class="text-muted">*Укажите ваши мерки при оформлении заказа</p>
+                </li>
               {% endif %}
             </ul>
           </form>
@@ -405,17 +408,9 @@
             {% endautoescape %}
           </div>
           <div class="p-4 p-lg-5 bg-white" style="padding-top: 0px !important;">
-            <div>
-              <h6 class="text-uppercase">{{ product.product_model.name }} </h6>
-              <p class="text-muted text-small mb-0">{{ product.product_model.description }}</p>
-            </div>
-            <div style="padding-top: 15px;">
-              <h6 class="text-uppercase">{{ product.material.name }} </h6>
-              <p class="text-muted text-small mb-0">{{ product.material.description }}</p>
-            </div>
             <div style="padding-top: 15px;">
               <h6 class="text-uppercase">Из чего состоит? </h6>
-              <p class="text-muted text-small mb-0">{{ product.product_composition }}</p>
+              <p class="text-muted text-small mb-0">{{ product.material.name }}</p>
             </div>
           </div>
         </div>

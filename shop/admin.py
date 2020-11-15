@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, Gallery, Review, Material, \
-	Tag, Model, Color, Colors, ReviewResponse, ProductSet, SizeSet, Size
+	Tag, Color, Colors, ReviewResponse, ProductSet, SizeSet, Size
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -35,11 +35,7 @@ class MaterialAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Material, MaterialAdmin)
 		
-class ModelAdmin(admin.ModelAdmin):
-	list_display=['name',]
-	prepopulated_fields = {'slug': ('name',)}
-admin.site.register(Model, ModelAdmin)
-		
+
 
 class ProductSetInline(admin.TabularInline):
 	prepopulated_fields = {'slug': ('size_set', 'price',)}

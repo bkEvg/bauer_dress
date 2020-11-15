@@ -56,7 +56,7 @@ class Privacy(models.Model):
 	content = RichTextField(blank=False, verbose_name='Контент')
 
 	def __str__(self):
-		return self.title
+		return self.content[:100]
 	
 
 	class Meta:

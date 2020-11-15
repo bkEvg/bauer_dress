@@ -8,7 +8,7 @@ import json
 
 
 class Order(models.Model):
-
+	paid = models.BooleanField(default=False, verbose_name='Оплачено')
 	first_name = models.CharField(max_length=50, verbose_name='Имя')
 	last_name = models.CharField(max_length=50, verbose_name='Фамилия')
 	address = models.CharField(max_length=200, verbose_name='Адрес')
@@ -16,8 +16,8 @@ class Order(models.Model):
 	email = models.EmailField(null=False, blank=False)
 	created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
 	updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-	paid = models.BooleanField(default=False, verbose_name='Оплачено')
 	dilivery_method = models.CharField(max_length=1, blank=False, verbose_name='Доставка')
+	comment = models.CharField(max_length=200, blank=False, null=True, verbose_name='Мерки')
 	coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL,
 	                                related_name='orders',
 	                                null=True,

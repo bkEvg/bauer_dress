@@ -27,8 +27,6 @@ class ListFilterForm(django_filters.FilterSet):
         fields = {
             'price_from': ['lt'],
             'price_to': ['gt'],
-            # 'rent': ['exact'],
-            'product_model': ['exact'],
             'material': ['exact'],
             'tag': ['exact'],
             'category': ['exact']
@@ -42,7 +40,6 @@ class ForRentFilterForm(django_filters.FilterSet):
         fields = {
             'price_from': ['lt'],
             'price_to': ['gt'],
-            'product_model': ['exact'],
             'material': ['exact'],
             'tag': ['exact'],
             'category': ['exact']

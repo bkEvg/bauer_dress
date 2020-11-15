@@ -45,9 +45,9 @@ def order_create(request):
 				'cart': cart})
 			mail_sent = send_mail(subject, None, settings.EMAIL_HOST_USER, [order.email, settings.MAIL], html_message=html)
 			#clearing cart and coupon
-			# cart.clear()
-			# if cart.coupon:
-			# 	cart.clear_coupon()
+			cart.clear()
+			if cart.coupon:
+				cart.clear_coupon()
 			return render(request, 'orders/order/created.html', {'order': order})
 	else:
 		form = OrderCreateForm()

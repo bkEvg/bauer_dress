@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from .models import Category, Product, Review, Material, Model, Tag, ReviewForm, Size, \
+from .models import Category, Product, Review, Material, Tag, ReviewForm, Size, \
 	Tag, ProductSet, SizeSet, ReviewResponse
 from django.utils import timezone
 from cart.forms import CartAddProductForm
@@ -21,7 +21,7 @@ def product_detail(request, id, slug, category_slug):
 	review_form = ReviewForm()
 	response_form = ReviewResponseForm()
 	category = get_object_or_404(Category, slug=category_slug)
-	products_with_category_exclude = Product.objects.filter(category=category).exclude(id=product.id)[:4]
+	products_with_category_exclude = Product.objects.filter(category=category, stock__gte=1).exclude(id=product.id)[:4]
 	if products_with_category_exclude.count() <= 1:
 		products_with_category_exclude = None
 	
@@ -41,7 +41,7 @@ def product_set__detail(request, id, slug, category_slug, set_slug):
 	review_form = ReviewForm()
 	response_form = ReviewResponseForm()
 	category = get_object_or_404(Category, slug=category_slug)
-	products_with_category_exclude = Product.objects.filter(category=category).exclude(id=product.id)[:5]
+	products_with_category_exclude = Product.objects.filter(category=category, stock__gte=1).exclude(id=product.id)[:5]
 	if products_with_category_exclude.count() <= 1:
 		products_with_category_exclude = None
 	set = get_object_or_404(ProductSet, slug=set_slug)

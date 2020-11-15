@@ -44,6 +44,10 @@
             <td>{{ order.address }}</td>
         </tr>
         <tr>
+            <th>Мерки</th>
+            <td>{{ order.comment }}</td>
+        </tr>
+        <tr>
             <th>Тип доставки</th>
             <td>{% if order.dilivery_method == '1' %}Самовывоз {% elif order.dilivery_method == '2' %}Почта России (270 руб.) {% elif order.dilivery_method == '3' %}Бесплатная доставка по Нск (в 10 км) {% elif order.dilivery_method == '4' %}Курьер по Нск не дальше 30км (350 руб.) {% else %}Что-то непонятное {% endif %}</td>
         </tr>
@@ -76,10 +80,8 @@
                         <td>{{ item.product.name }}{% if item.product.rent %} (аренда){% endif %}</td>
                         <td class="num">{{ item.price }}{% if item.product.rent %} руб/{% if item.product.pay_method %}{{ item.product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</td>
                         <td class="num">{{ item.quantity }}</td>
-                        {% autoescape off %}
-                            <td class="num">{{ item.size }}</td>
-                            <td class="num">{{ item.color }}</td>
-                        {% endautoescape %}
+                        <td class="num">{{ item.size }}</td>
+                        <td class="num">{{ item.color }}</td>
                         <td class="num">{{ item.get_cost }} Р</td>
                     </tr>
                 {% endfor %}
