@@ -1,0 +1,548 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block seo %}
+    {% block product %}
+        <title>{{ product.name }} в интернет-магазине Bauer Dress</title>
+        <meta name="description" content="{{ product.category.get_seo_description }}"/>
+    {% endblock %}
+{% endblock %}
+{% block content %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-6">
+          <div class="owl-carousel owl-carousel-product owl-theme">
+            {% for images in product.images.all %}
+            <div class="item"><img class="img-fluid owl-lazy" src="{{ images.image.url }}" data-src="{{ images.image.url }}" alt="{{ product.images.alt }}"></div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- PRODUCT DETAILS-->
+        <div class="col-lg-6">
+          <ul class="list-inline mb-2">
+            {% include 'shop/product/rating_block.html' %}<span class="text-muted" style="font-size: 0.9em;">({{ product.reviews.all|length }})</span>
+          </ul>
+          <h1>{{ product.name }}</h1>
+          <p class="text-muted lead fw-400">{% block price %}{% endblock %}{% if product.rent %} руб/{% if product.pay_method %}{{ product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</p>
+          <p class="text-small mb-4">
+            {% autoescape off %}
+            {{ product.description }}
+            {% endautoescape %}
+          </p>
+          <form action="{% block form_action %}{% endblock %}" method="POST">
+            {% csrf_token %}
+            {% for hidden_field in cart_product_form.hidden_fields %}
+              {{ hidden_field }}
+            {% endfor %}
+            {% if cart_product_form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {% for error in cart_product_form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+            <p data-toggle="modal" data-target=".bd-example-modal-lg" class="size-table d-inline">Таблица размеров</p><span class="text-muted">*</span>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title" id="myLargeModalLabel">Таблица размеров</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="table-responsive-sm">
+                            <table class="table">
+                              <thead>
+                                  <tr>
+                                      <!-- <th>&nbsp;</th> -->
+                                      <th>Лет</th>
+                                      <th class="text-left">Рост</th>
+                                      <th>Обхват гр.</th>
+                                      <th>Наш размер</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          44-50
+                                      </td>
+
+                                      <td>
+                                          43
+                                      </td>
+
+                                      <td>
+                                          50
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          50-56
+                                      </td>
+
+                                      <td>
+                                          44,5
+                                      </td>
+
+                                      <td>
+                                          56
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          56-62
+                                      </td>
+
+                                      <td>
+                                          46
+                                      </td>
+
+                                      <td>
+                                          62
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          62-68
+                                      </td>
+
+                                      <td>
+                                          47,5
+                                      </td>
+
+                                      <td>
+                                          68
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          68-74
+                                      </td>
+
+                                      <td>
+                                          51
+                                      </td>
+
+                                      <td>
+                                          74
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;
+                                      </td>
+
+                                      <td>
+                                          74-80
+                                      </td>
+
+                                      <td>
+                                          52
+                                      </td>
+
+                                      <td>
+                                          80
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          1
+                                      </td>
+
+                                      <td>
+                                          80-86
+                                      </td>
+
+                                      <td>
+                                          53
+                                      </td>
+
+                                      <td>
+                                          86
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          1-2
+                                      </td>
+
+                                      <td>
+                                          86-92
+                                      </td>
+
+                                      <td>
+                                          54
+                                      </td>
+
+                                      <td>
+                                          92
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          2-3
+                                      </td>
+
+                                      <td>
+                                          92-98
+                                      </td>
+
+                                      <td>
+                                          55
+                                      </td>
+
+                                      <td>
+                                          98
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          3-4
+                                      </td>
+
+                                      <td>
+                                          98-104
+                                      </td>
+
+                                      <td>
+                                          55
+                                      </td>
+
+                                      <td>
+                                          104
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          4-5
+                                      </td>
+
+                                      <td>
+                                          104-110
+                                      </td>
+
+                                      <td>
+                                          56
+                                      </td>
+
+                                      <td>
+                                          110
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          5-6
+                                      </td>
+
+                                      <td>
+                                          110-116
+                                      </td>
+
+                                      <td>
+                                          57
+                                      </td>
+
+                                      <td>
+                                          116
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          6-7
+                                      </td>
+
+                                      <td>
+                                          116-122
+                                      </td>
+
+                                      <td>
+                                          58
+                                      </td>
+
+                                      <td>
+                                          122
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          7-8
+                                      </td>
+
+                                      <td>
+                                          122-128
+                                      </td>
+
+                                      <td>
+                                          61
+                                      </td>
+
+                                      <td>
+                                          128
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          8-9
+                                      </td>
+
+                                      <td>
+                                          128-134
+                                      </td>
+
+                                      <td>
+                                          65
+                                      </td>
+
+                                      <td>
+                                          134
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          9-10
+                                      </td>
+
+                                      <td>
+                                          134-140
+                                      </td>
+
+                                      <td>
+                                          66
+                                      </td>
+
+                                      <td>
+                                          140
+                                      </td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row align-items-stretch">
+                <div class="col-lg-12 pr-sm-1 pt-15 d-flex" style='padding-top: 15px;'>
+                    {% block sets %}{% endblock %}
+                </div>
+            </div>
+            <div class="row align-items-stretch mb-4">
+              <div class="col-sm-6 pr-sm-0" style='padding-top: 15px;'>
+                <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white" style="height: 54px;"><span class="small text-uppercase text-gray mr-4 no-select">Цвет</span>
+                    {% render_field cart_product_form.color class="form-control product-size-variation-btn b-rad--none w200 form-control custom-select" style='width: auto;padding-right: 1.75rem;border: none;font-size:16px;cursor: pointer;' %}
+                </div>
+              </div>
+              <div class="col-sm-5 pr-sm-0 pt-15" style='padding-top: 15px;'>
+                <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white"><span class="small text-uppercase text-gray mr-4 no-select" style="white-space: nowrap;">Кол-во</span>
+                  <div class="quantity bg-transp">
+                    <a class="dec-btn" style="padding: 10px;cursor: pointer;"><i class="fas fa-caret-left"></i></a>
+                    <input class="form-control border-0 shadow-0 p-0 text-gray" type="text" value="1" name="quantity" id="quantity">
+                    <a class="inc-btn" style="padding: 10px;cursor: pointer;"><i class="fas fa-caret-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 pl-sm-0 p-0 pt-15">
+              {% block cart_add_button %}{% endblock %}
+            </div>
+            {% block wishlist_add %}{% endblock %}
+            <ul class="list-unstyled small d-inline-block pt-4">
+              <li class="px-3 py-2 mb-1 bg-white">
+                <strong class="text-uppercase">SKU:</strong>
+                <span class="ml-2 text-muted">{{ product.id }}</span>
+              </li>
+              {% if product.category %}
+                <li class="px-3 py-2 mb-1 bg-white text-muted">
+                  <strong class="text-uppercase text-dark">Категория:</strong>
+                  <a class="reset-anchor ml-2" href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>
+                </li>
+              {% endif %}
+              {% if product.tag %}
+                <li class="px-3 py-2 mb-1 bg-white text-muted">
+                  <strong class="text-uppercase text-dark">Тэг:</strong>
+                    <a class="reset-anchor ml-2" href="{{ product.tag.get_absolute_url }}">{{ product.tag.name }}</a>
+                </li>
+                <li>
+                  <p class="text-muted">*Укажите ваши мерки при оформлении заказа</p>
+                </li>
+              {% endif %}
+            </ul>
+          </form>
+
+        </div>
+      </div>
+      <!-- DETAILS TABS-->
+      <ul class="nav nav-tabs border-0" id="myTab" role="tablist">
+        <li class="nav-item"><a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Описание</a></li>
+        <li class="nav-item"><a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Отзывы ({{ product.reviews.all|length }})</a></li>
+      </ul>
+      <div class="tab-content mb-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+          <div class="p-4 p-lg-5 bg-white">
+            <h6 class="text-uppercase">Описание товара </h6>
+            {% autoescape off %}
+            <p class="text-muted text-small mb-0">{{ product.description }}</p>
+            {% endautoescape %}
+          </div>
+          <div class="p-4 p-lg-5 bg-white" style="padding-top: 0px !important;">
+            <div style="padding-top: 15px;">
+              <h6 class="text-uppercase">Из чего состоит? </h6>
+              <p class="text-muted text-small mb-0">{{ product.material.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+          <div class="p-4 p-lg-5 bg-white">
+            <div class="row">
+              <div class="col-lg-8">
+                {% if user.is_authenticated %}
+                <form action="{% url 'shop:rate' product.id %}" method="POST" class="form pr--30">
+                  {% csrf_token %}
+                      <div class="form__group mb-2">
+                          <label class="form__label d-block mb-2" for="name">Имя</label>
+                          {% render_field review_form.name class="form-control" %}
+                      </div>
+                      <div class="form__group mb-1">
+                          <label class="form__label d-block mb-2" for="email">Ваш Отзыв</label>
+                          {% render_field review_form.review class="form-control form__input--textarea" %}
+                      </div>
+                      <div class="form__group mb-2">
+                          <label class="form__label d-block mb-2">Ваша Оценка<span
+                                  class="required">*</span></label>
+                          <div class="rating">
+                              <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" />
+                              <label for="star5">☆</label>
+                              <input id="star4" name="rating" type="radio" value="4" class="radio-btn hide" />
+                              <label for="star4">☆</label>
+                              <input id="star3" name="rating" type="radio" value="3" class="radio-btn hide" />
+                              <label for="star3">☆</label>
+                              <input id="star2" name="rating" type="radio" value="2" class="radio-btn hide" />
+                              <label for="star2">☆</label>
+                              <input id="star1" name="rating" type="radio" value="1" class="radio-btn hide" />
+                              <label for="star1">☆</label>
+                              <div class="clear"></div>
+                          </div>
+                      </div>
+                      <div class="form__group">
+                          <div class="form-row">
+                              <div class="col-12">
+                                  <button class="btn btn-dark btn btn-block h-100 d-flex align-items-center justify-content-center px-0" type="submit">Опубликовать</button>
+                              </div>
+                          </div>
+                      </div>
+                </form>
+                {% else %}
+                <p class="form-group"><a href="{% url 'account_login' %}">Войдите</a>, чтобы оставить отзыв</p>
+                {% endif %}
+                <div class="mt-5">
+                {% for review in product.reviews.all %}
+                    <div class="media mb-3">
+                        <img class="rounded-circle" src="{% if product.reviews.avatar %}{{ product.reviews.avatar.image.url }}{% else %}{% static 'avatars/default.png' %}{% endif %}" alt="Profile Photo" width="50">
+                      <div class="media-body ml-3">
+                        <h6 class="mb-0 text-uppercase">{{ review.name }}</h6>
+                        <p class="small text-muted mb-0 text-uppercase">{{ review.updated|date:'j E o' }}</p>
+                        <ul class="list-inline mb-1 text-xs">
+                          {% include 'shop/product/review_rating_block.html' %}
+                        </ul>
+                        <p class="text-small mb-0 text-muted">{{ review.review }}</p>
+                        {% if user.is_staff %}
+                        <a data-toggle="modal" data-target="#exampleModal{{ review.user.id }}" style="cursor: pointer;font-size: 14px;">Ответить</a>
+                        {% endif %}
+                        <div class="modal fade" id="exampleModal{{ review.user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ответ пользователю: {{ review.name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="POST" action="{% url 'shop:response' review.id %}">
+                                  {% csrf_token %}
+                                  {{ response_form|crispy }}
+                                  <button type="submit" class="btn btn-primary">Отправить</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>               
+                      </div>
+                    </div>
+                    {% for response in review.responses.all %}
+                    <div class="col-lg-12">
+                        <div class="media mb-3 ml-3">
+                            <img class="rounded-circle" src="{% static 'shop/img/BauerDressDark.png' %}" alt="Bauer Dress Logo" width="50">
+                          <div class="media-body ml-3">
+                            <h6 class="mb-0 text-uppercase" style="display: flex;">
+                                {{ response.user.first_name }}
+                                {% if response.user.is_staff %} <img class="ml-1" style="height: 1em;" alt="verified badge" src="{% static 'shop/img/verified_badge.svg' %}">
+                                {% endif %}
+                            </h6>
+                            <p class="small text-muted mb-0 text-uppercase">{{ response.updated|date:'j E o' }}</p>
+                            <p class="text-small mb-0 text-muted" style="word-wrap: anywhere;">{{ response.response }}</p>
+                          </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% empty %}
+                    Нет отзывов
+                {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if category_products %}
+      <!-- RELATED PRODUCTS-->
+      <h2 class="h5 text-uppercase mb-4">Похожие товары</h2>
+      <div class="row">
+        {% for product in category_products %}
+        <!-- PRODUCT-->
+        <div class="col-lg-3 col-sm-6">
+          <div class="product text-center skel-loader">
+            <div class="d-block mb-3 position-relative">
+              {% if product.status_new %}
+              <div class="badge text-white badge-primary">Новинка</div>
+              {% endif %}
+              <a class="d-block" href="{{ product.get_absolute_url }}">
+                <img class="img-fluid w-100" src="{% if product.images.first %}{{ product.images.first.image.url }}{% else %}{% static 'shop/img/product-banners/example.jpg' %} {% endif %}" alt="{{ product.images.first.alt }}">
+              </a>
+            </div>
+            <h6><a class="reset-anchor" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+            <p class="small text-muted">от {{ product.price_from }}{% if product.rent %} руб/{% if product.pay_method %}{{ product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+<main class="main-content-wrapper">
+    <div class="error-area pt--50 pt-xl--70 pb--120 pb-xl--100 pb-lg--95 pb-sm--90">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8 text-center">
+                    <div class="error">
+                        <h1>Sorry!</h1>
+                        <h2>Данная страница находится в работе</h2>
+                        <a href="{% url 'shop:index' %}" class="btn">На Главную</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block seo %}
+    <title>Bauer Dress | Задать вопрос</title>
+{% endblock %}
+{% block content %}
+<main class="main-content-wrapper">
+    <div class="error-area pt--90 pt-xl--70 pb--120 pb-xl--100 pb-lg--95 pb-sm--90">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8 mt-5 mb-5">
+                    <div class="content-section">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <h2>Задать вопрос</h2>
+                            </fieldset>
+                            <div class="form-group">
+                            	<form method="POST">
+                            		{{ form|crispy }}
+                            	</form>
+                                <button class="btn btn-outline-info" type="submit">Отправить</button>
+                                <a class="btn btn-outline-secondary" href="{% url 'info:faq' %}">Отмена</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

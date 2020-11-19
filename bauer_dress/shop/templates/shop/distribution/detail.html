@@ -1,0 +1,34 @@
+{% extends 'shop/distribution/detail_base.html' %}
+<!-- {% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %} -->
+
+
+{% block price %}от {{ product.price_from }}{% endblock %}
+
+{% block sets %}
+    <div class="owl-carousel size-slider owl-theme">
+		{% for set in product.sets.all %}
+		<div class="item">
+	        <a style="padding-right: 10px;text-decoration: none;" class="size-var d-flex" href="{{ set.get_absolute_url }}">
+	          <div class="border d-flex align-items-center justify-content-between py-3 px-3 bg-white border-white">
+	            <span class="small text-uppercase text-gray" style="white-space: nowrap;">{{ set.size_set }}</span>
+	          </div>
+	        </a>
+	    </div>
+	    {% endfor %}
+	</div>
+{% endblock %}
+
+{% block form_action %}#{% endblock %}
+
+{% block cart_add_button %}
+<button class="btn btn-dark btn btn-block h-100 d-flex align-items-center justify-content-center px-0" type="submit" disabled data-toggle="tooltip" data-placement="right" title="Выберите размер">В корзину</button>
+{% endblock %}
+
+{% block wishlist_add %}
+	<a class="btn btn-link text-decoration-none p-0 pt-1 text-gray" data-toggle="tooltip" data-placement="right" title="Выберите размер" href="#" disabled>
+      <i class="far fa-heart mr-2"></i>
+      Добавить в желания
+    </a><br>
+{% endblock %}
