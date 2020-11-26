@@ -159,17 +159,17 @@
                 <label class="text-small text-uppercase" for="{{ field.id_for_label }}">Мерки</label>
                 {% if form.is_bound %}
                     {% if field.errors %}
-                        {% render_field form.comment class="form-control form-control-lg is-invalid" placeholder="Рост-175, грудь-80" %}
+                        {% render_field form.comment class="form-control form-control-lg is-invalid" placeholder="напр. Рост-175, грудь-80" %}
                         {% for error in field.errors %}
                             <div class="invalid-feedback">
                               {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.comment class="form-control form-control-lg is-valid" placeholder="Рост-175, грудь-80" %}
+                        {% render_field form.comment class="form-control form-control-lg is-valid" placeholder="напр. Рост-175, грудь-80" %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.comment class="form-control form-control-lg " placeholder="Рост-175, грудь-80" %}
+                    {% render_field form.comment class="form-control form-control-lg " placeholder="напр. Рост-175, грудь-80" %}
                 {% endif %}
               </div>        
               <div class="col-lg-8 form-group">

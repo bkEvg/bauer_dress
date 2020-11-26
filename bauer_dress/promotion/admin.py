@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Promotion, PromoProduct, FirstPage, SecondPage, \
-	ThirdPage, ServicePage, SubPage
+	ServicePage, SubPage
 
 
 class PromoProductInline(admin.TabularInline):

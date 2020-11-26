@@ -40,8 +40,8 @@ class Category(SeoModel):
 
 	class Meta:
 		ordering=('name',)
-		verbose_name = 'категория'
-		verbose_name_plural = 'категории'
+		verbose_name = 'тип товара'
+		verbose_name_plural = 'типы товаров'
 
 	def __str__(self):
 		return self.name

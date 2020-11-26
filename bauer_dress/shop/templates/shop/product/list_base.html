@@ -40,7 +40,7 @@
             </div>
             <form method="get">
               <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Категория</strong>
+                <strong class="small text-uppercase font-weight-bold">Тип товара</strong>
               </div>
               {% render_field filter.form.category class="js-example-placeholder-multiple form-control custom-select" %}
               <div class="py-2 bg-light">
@@ -48,10 +48,6 @@
               </div>
               {% render_field filter.form.price_to__gt class="form-control" placeholder="От" style="border-bottom: none;" %}
               {% render_field filter.form.price_from__lt class="form-control" placeholder="До" %}
-              <!-- <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Модель</strong>
-              </div>
-              {% render_field filter.form.product_model class="js-example-placeholder-multiple form-control custom-select" %} -->
               <div class="py-2 bg-light">
                 <strong class="small text-uppercase font-weight-bold">Материал</strong>
               </div>

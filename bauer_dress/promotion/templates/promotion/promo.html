@@ -50,6 +50,7 @@
           </div>
         </section>
         <!-- TRENDING PRODUCTS-->
+        {% if products %}
         <section class="py-5">
           <header>
             <p class="small text-muted small text-uppercase mb-1">{{ promotion.third_page.subtitle }}</p>
@@ -75,11 +76,10 @@
                     <p class="small text-muted">от {{ product.price_from }}{% if product.rent %} руб/{% if product.pay_method %}{{ product.pay_method }}{% else %}ч{% endif %}{% else %} руб.{% endif %}</p>
                   </div>
                 </div>
-            {% empty %}
-              Oops
             {% endfor %}
           </div>
         </section>
+        {% endif %}
         <!-- SERVICES-->
         {% if promotion.service_page %}
         <section class="py-5 bg-light">

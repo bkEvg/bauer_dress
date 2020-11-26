@@ -188,9 +188,6 @@ def new_products(request):
 		'products': products,
 	})
 
-def main(request):
-	return render(request, 'shop/main.html')
-
 
 @staff_member_required
 def review_response(request, review_id):

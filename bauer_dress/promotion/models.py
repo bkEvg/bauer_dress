@@ -30,7 +30,7 @@ class FirstPage(models.Model):
 		help_text='Максимум 2 слова с предлогом, побуждение что-то сделать, например: узнать, перейти и тд')
 	image = models.ImageField(upload_to='promo/first_page/images', verbose_name='Главное фото',
 		help_text='Примерные размеры фото 1900х650, сам товар находится в правой части фото,\
-		если разделить фото на три части двумя линиями, то товар на второй линии')
+		если разделить фото на три части двумя линиями, то товар на второй линии', blank=False, null=True)
 
 
 	class Meta:
@@ -69,23 +69,6 @@ class SecondPage(models.Model):
 	def __str__(self):
 		return self.name
 
-
-
-class ThirdPage(models.Model):
-	name = models.CharField('Название для этого тэмплейта', max_length=100, blank=True)
-
-
-	subtitle = models.CharField('Подзаголовок страницы', max_length=200, blank=True, null=True)
-	title = models.CharField('Заголовок страницы', max_length=200, blank=True, null=True)
-
-
-	class Meta:
-		verbose_name = 'Третья страница'
-		verbose_name_plural = '3. Третьи страницы'
-
-
-	def __str__(self):
-		return self.name
 
 
 class ServicePage(models.Model):
@@ -136,12 +119,11 @@ class SubPage(models.Model):
 
 
 class Promotion(SeoPromotion):
-	theme_of_promo = models.CharField('Тема акции \n(подзаголовок на главной)', max_length=60)
-	offer = models.CharField('Оффер на главной странице', max_length=100, blank=False)
+	theme_of_promo = models.CharField('Тема акции \n(подзаголовок на главной)', max_length=60, blank=True, null=True)
+	offer = models.CharField('Оффер на главной странице', max_length=100, blank=False, null=True)
 	slug = models.SlugField(max_length=200, unique=True, blank=False, null=True)
-	first_page = models.ForeignKey(FirstPage, verbose_name='Первый экран', on_delete=models.SET_NULL, null=True)
+	first_page = models.ForeignKey(FirstPage, verbose_name='Первый экран', on_delete=models.SET_NULL, null=True, blank=True)
 	second_page = models.ForeignKey(SecondPage, verbose_name="Второй экран", on_delete=models.SET_NULL, null=True)
-	third_page = models.ForeignKey(ThirdPage, verbose_name="Третий эран", on_delete=models.SET_NULL, null=True)
 	service_page = models.ForeignKey(ServicePage, verbose_name='Экран услуг', on_delete=models.SET_NULL, null=True, related_name='service')
 	sub_page = models.ForeignKey(SubPage, verbose_name='Экран подписки', on_delete=models.SET_NULL, null=True)
 	is_main = models.BooleanField('Главный', default=False)
@@ -149,7 +131,7 @@ class Promotion(SeoPromotion):
 	
 
 	def get_absolute_url(self):
-		return reverse('promo:exact_promo', kwargs={'slug': self.slug})
+		return reverse('promo:index', kwargs={'slug': self.slug})
 
 	def __str__(self):
 		return self.theme_of_promo
