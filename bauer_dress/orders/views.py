@@ -8,11 +8,11 @@ from shop.models import Product
 from django.contrib.admin.views.decorators import staff_member_required
 from django_simple_coupons.forms import CouponApplyForm
 import weasyprint
-from django.template import loader
+
 from django.core.mail import send_mail
 from email_sub.models import Subscription
 from django.core.exceptions import ObjectDoesNotExist
-
+from .tasks import order_created
 
 
 def order_create(request):
@@ -39,12 +39,13 @@ def order_create(request):
 			except ObjectDoesNotExist:
 				Subscription.objects.create(name=order.first_name, surname=order.last_name, email=order.email)
 			# send email with html template
-			subject = 'Заказ #{}'.format(order.id)
-			html = loader.render_to_string('orders/order/mail2.html', context={
-				'order': order,
-				'cart': cart})
-			mail_sent = send_mail(subject, None, settings.EMAIL_HOST_USER, [order.email, settings.MAIL], html_message=html)
+			# subject = 'Заказ #{}'.format(order.id)
+			# html = loader.render_to_string('orders/order/mail2.html', context={
+			# 	'order': order,
+			# 	'cart': cart})
+			# mail_sent = send_mail(subject, None, settings.EMAIL_HOST_USER, [order.email, settings.MAIL], html_message=html)
 			#clearing cart and coupon
+			order_created.delay(order.id)
 			cart.clear()
 			if cart.coupon:
 				cart.clear_coupon()
