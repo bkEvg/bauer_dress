@@ -67,23 +67,6 @@ class Material(models.Model):
 		return reverse('shop:index_by_material', kwargs={'material_slug': self.slug})
 
 
-# class Model(models.Model):
-# 	name = models.CharField(max_length=50, blank=False, verbose_name='Модель изделия')
-# 	description = models.CharField('Описание модели, возможно даже его преимущества', max_length=250, blank=False, null=True)
-# 	slug = models.SlugField(max_length=200, db_index=True, unique=True, verbose_name=u"Название (лат.)")
-
-
-# 	def __str__(self):
-# 		return self.name
-
-# 	class Meta:
-# 		verbose_name='модель изделия'
-# 		verbose_name_plural = 'модели изделий'
-
-# 	def get_absolute_url(self):
-# 		return reverse('shop:index_by_model', args=[self.slug])
-
-
 class Tag(models.Model):
 	name = models.CharField(max_length=50, blank=False, verbose_name='Название')
 	slug = models.SlugField(max_length=200, db_index=True, unique=True, verbose_name=u"Название (лат.)")
@@ -106,7 +89,7 @@ class Product(models.Model):
 	Product model
 	"""
 	category = models.ForeignKey(Category, related_name='products', 
-		on_delete=models.SET_NULL, null=True, verbose_name=u"Категория")
+		on_delete=models.SET_NULL, null=True, verbose_name=u"Тип товара")
 	name = models.CharField(max_length=200, db_index=True, verbose_name=u"Название")
 	slug = models.SlugField(max_length=200, db_index=True, verbose_name=u"URL", 
 		help_text='То как этот товар будет отображен в URL.')
