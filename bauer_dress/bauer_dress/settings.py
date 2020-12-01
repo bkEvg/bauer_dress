@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '*bakp!s@j#f0&4&%ihm=7!mx-06qh@evs!%fb8d6fx0__s1*0#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost'
@@ -172,8 +172,8 @@ WISHLIST_SESSION_ID = 'wishlist'
 #smtp
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'bk.evg01@gmail.com'
-EMAIL_HOST_PASSWORD = 'a18b10c01'
+EMAIL_HOST_USER = 'bauerdress.linode@gmail.com'
+EMAIL_HOST_PASSWORD = 'X2BNiDkbAA9ECbh'
 EMAIL_PORT = 587
 
 #Celery

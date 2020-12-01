@@ -452,12 +452,12 @@
                         <span class="total-space" style="font-weight: bold; color: #4d4d4d">К Оплате</span>
                       </td>
                       <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
-                        <span class="total-space">{{ order.get_total_cost|floatformat:"2" }} Р</span> <br />
+                        <span class="total-space" style="white-space: nowrap;">{{ order.get_total_cost|floatformat:"2" }} руб.</span> <br />
                         {% if order.coupon %}
                           <span class="total-space">{% if order.coupon.discount.is_percentage %} -{{ order.coupon.discount.value }}%{% else %} -{{ order.coupon.discount.value }} руб.{% endif %}</span>  <br />
                         {% endif %}
                         <span class="total-space">{% if order.dilivery_method == '1' %}Самовывоз {% elif order.dilivery_method == '2' %}270 руб.{% elif order.dilivery_method == '3' %}Бесплатно{% elif order.dilivery_method == '4' %}350 руб.{% else %}Что-то непонятное {% endif %}</span>  <br />
-                        <span class="total-space" style="font-weight:bold; color: #4d4d4d">{{ order.get_total }} руб.</span>
+                        <span class="total-space" style="font-weight:bold; color: #4d4d4d;white-space: nowrap;">{{ order.get_total }} руб.</span>
                       </td>
                     </tr>
                   </table>
