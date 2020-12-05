@@ -12,9 +12,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from allauth.account.decorators import verified_email_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.http import require_POST
+from django.views.decorators.cache import cache_page
 
 
-
+@cache_page(60 * 15)
 def product_detail(request, id, slug, category_slug):
 	product = get_object_or_404(Product, id=id, slug=slug, stock__gt=0)
 	cart_product_form = CartAddProductForm()
@@ -34,7 +35,7 @@ def product_detail(request, id, slug, category_slug):
 														'category_products': products_with_category_exclude})
 
 
-
+@cache_page(60 * 15)
 def product_set__detail(request, id, slug, category_slug, set_slug):
 	product = get_object_or_404(Product, id=id, slug=slug, stock__gt=0)
 	cart_product_form = CartAddProductForm()
@@ -63,7 +64,7 @@ def product_set__detail(request, id, slug, category_slug, set_slug):
 
 
 
-
+@cache_page(60 * 15)
 def product_list(request, category_slug=None, tag_slug=None):
 	category = None
 	tag = None
@@ -91,7 +92,8 @@ def product_list(request, category_slug=None, tag_slug=None):
 		'category':category,
 		'tag': tag,
 	})
-
+	
+@cache_page(60 * 15)
 def for_rent(request):
 	products = Product.objects.filter(stock__gt=0, rent=True).order_by('-updated')
 	f = ForRentFilterForm(request.GET, queryset=products)
