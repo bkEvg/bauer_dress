@@ -2,13 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/linux,python,django,database
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,python,django,database
 
-### Database ###
-*.accdb
-*.db
-*.dbf
-*.mdb
-*.pdb
-*.sqlite3
 
 ### Django ###
 *.log
