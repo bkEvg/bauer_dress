@@ -122,6 +122,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -171,10 +172,10 @@ WISHLIST_SESSION_ID = 'wishlist'
 
 #smtp
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'bauerdress.linode@gmail.com'
-EMAIL_HOST_PASSWORD = 'X2BNiDkbAA9ECbh'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 465
 
 #Celery
 REDIS_HOST = 'localhost'

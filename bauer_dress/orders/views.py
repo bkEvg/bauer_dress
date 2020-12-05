@@ -8,7 +8,7 @@ from shop.models import Product
 from django.contrib.admin.views.decorators import staff_member_required
 from django_simple_coupons.forms import CouponApplyForm
 import weasyprint
-
+from asgiref.sync import async_to_sync
 from django.core.mail import send_mail
 from email_sub.models import Subscription
 from django.core.exceptions import ObjectDoesNotExist
