@@ -78,13 +78,13 @@ MIDDLEWARE = [
 ]
 
 CACHES = {
-   'default': {
-      'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-      'LOCATION': '127.0.0.1:11211',
-   }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'unix:/tmp/memcached.sock',
+    }
 }
 
-CACHE_MIDDLEWARE_ALIAS = 'bauerdress_cache'
+CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 10 #site will be cached for 10 mins
 
 ROOT_URLCONF = 'bauer_dress.urls'
