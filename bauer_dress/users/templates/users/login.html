@@ -4,22 +4,22 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}Войти{% endblock %}
 
 {% block content %}
 <section class="py-5 bg-light">
   <div class="container">
     <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
       <div class="col-lg-6">
-        <h1 class="h2 text-uppercase mb-0">{% trans "Sign In" %}</h1>
+        <h1 class="h2 text-uppercase mb-0">Войти</h1>
       </div>
     </div>
   </div>
 </section>
 
 
-<p class="col-lg-6 form-group">{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+<p class="col-lg-6 form-group pt-1">Если у вас ещё нет учётной записи, пожалуйста, сначала 
+<a href="{{ signup_url }}">зарегистрируйтесь</a>.</p>
 
 <section class="py-5">
   <!-- LOGIN FORM-->
@@ -31,7 +31,7 @@
 	      {{ form|crispy }}
 	      <div class="form-group mb-5">
 		    <button class="btn btn-dark" type="submit">
-		    	{% trans "Sign In" %}
+		    	Войти
 			  </button>
 		  </div>
 		</form>

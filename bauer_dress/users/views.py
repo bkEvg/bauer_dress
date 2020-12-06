@@ -9,5 +9,5 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     template_name = "users/register.html"
     form_class = UserCreateForm
-    success_url = '/login'
+    success_url = '/accounts/login'
     success_message = 'Аккаунт для %(username)s был создан!'
