@@ -59,10 +59,6 @@ INSTALLED_APPS = [
     'django_simple_coupons',
     'ckeditor',
     'flower',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -109,13 +105,6 @@ TEMPLATES = [
 ]
 
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 
 WSGI_APPLICATION = 'bauer_dress.wsgi.application'
@@ -208,19 +197,7 @@ else:
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = 'shop:index'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 30
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
-ACCOUNT_USERNAME_BLACKLIST = ['admin']
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
-ACCOUNT_MAX_EMAIL_ADDRESSES = 2
-ACCOUNT_USERNAME_MIN_LENGTH = 5
+LOGOUT_REDIRECT_URL = 'shop:index'
 
 
 

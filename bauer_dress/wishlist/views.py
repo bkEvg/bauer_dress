@@ -9,12 +9,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_POST
 # from .forms import WishlistForm
 from cart.forms import CartAddProductForm
-from allauth.account.decorators import verified_email_required
-
+from django.contrib.auth.decorators import login_required
 from shop.models import SizeSet, ProductSet, Product
 from cart.cart import Cart
-
-@verified_email_required
+@login_required
 def index(request):
 	try:
 		wishlist = Wishlist.objects.get(user=request.user)
@@ -25,8 +23,7 @@ def index(request):
 				'cart_product_form': cart_product_form})
 
 
-
-@verified_email_required
+@login_required
 def wishlist_add(request, product_id, price, product_set_slug):
 
 	wishlist = Wishlist.objects.get(user=request.user)
@@ -48,7 +45,7 @@ def wishlist_add(request, product_id, price, product_set_slug):
 		wishlist_items = wishlist.items.create(product=product, price=price, product_set=product_set)
 	messages.success(request, message='Товар успешно добавлен в Желания!')
 	return redirect(url)
-
+@login_required
 def wishlist_remove(request, product_id, price, quantity, product_set_slug):
 	url = request.META.get('HTTP_REFERER')
 	product_set = get_object_or_404(ProductSet, slug=product_set_slug)
