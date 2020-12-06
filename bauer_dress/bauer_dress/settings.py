@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django_simple_coupons',
     'ckeditor',
     'flower',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -197,8 +198,6 @@ else:
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = 'shop:index'
-LOGOUT_REDIRECT_URL = 'shop:index'
-
 
 
 FILTERS_EMPTY_CHOICE_LABEL = 'Выберите...'

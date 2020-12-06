@@ -27,6 +27,7 @@ urlpatterns = [
     path('info/', include('information.urls')),
     path('promo/', include('promotion.urls')),
     path('wishlist/', include('wishlist.urls')),
+    path('accounts/', include('users.urls')),
     path('', include('shop.urls')),
 ]
 handler404 = 'shop.views.error404'
