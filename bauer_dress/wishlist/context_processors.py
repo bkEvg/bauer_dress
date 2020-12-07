@@ -1,9 +1,7 @@
 from .models import Wishlist
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from allauth.account.decorators import verified_email_required
 
-# @verified_email_required
 def wishlist(request):
 	if request.user.is_authenticated:
 		try:

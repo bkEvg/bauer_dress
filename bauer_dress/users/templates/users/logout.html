@@ -1,0 +1,24 @@
+{% extends "users/base.html" %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}Вы вышли{% endblock %}
+
+{% block content %}
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h2 text-uppercase mb-0">Вы вышли</h1>
+        <div class="border-top pt-3">
+			<small class="text-muted">
+				<a href="{% url 'account_login' %}">Войти снова</a>
+			</small>
+		</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

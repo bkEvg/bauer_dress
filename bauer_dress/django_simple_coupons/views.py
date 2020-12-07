@@ -7,14 +7,12 @@ from django.contrib import messages
 
 from django_simple_coupons.validations import validate_coupon
 from django_simple_coupons.models import Coupon
-from allauth.account.decorators import verified_email_required
 
 from django.http import HttpResponse
 
 
 
 
-@verified_email_required
 @require_POST
 def coupon_apply(request):
     form = CouponApplyForm(request.POST)

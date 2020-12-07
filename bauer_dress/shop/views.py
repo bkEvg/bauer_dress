@@ -9,7 +9,6 @@ from django.contrib import messages
 from .forms import ListFilterForm, ReviewResponseForm, ForRentFilterForm
 from promotion.models import Promotion
 from django.core.exceptions import ObjectDoesNotExist
-from allauth.account.decorators import verified_email_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.http import require_POST
 from django.views.decorators.cache import cache_page
@@ -107,7 +106,6 @@ def for_rent(request):
 	})
 
 
-@verified_email_required
 def rate_product(request, id):
 	product = get_object_or_404(Product, id=id)
 	url = product.get_absolute_url()
