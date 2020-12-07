@@ -171,11 +171,12 @@ WISHLIST_SESSION_ID = 'wishlist'
 
 
 #smtp
+#EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 465
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
 
 #Celery
 REDIS_HOST = 'localhost'
