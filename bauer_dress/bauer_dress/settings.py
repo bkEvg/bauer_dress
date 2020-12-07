@@ -59,8 +59,9 @@ INSTALLED_APPS = [
     'email_sub.apps.EmailSubConfig',
     'django_simple_coupons',
     'ckeditor',
-    'flower',
-    'users',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,16 @@ CACHES = {
         'LOCATION': 'unix:/tmp/memcached.sock',
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 10 #site will be cached for 10 mins
@@ -177,6 +188,7 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'help@bauerdress.ru'
 
 #Celery
 REDIS_HOST = 'localhost'
