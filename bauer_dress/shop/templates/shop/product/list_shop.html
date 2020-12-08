@@ -4,7 +4,8 @@
 
 {% block hero %}
   <div class="col-lg-6">
-    <h1 class="h2 text-uppercase mb-0">Магазин{% if category %}<span class="breadcrumb-item active fz-6">/{{ category.name }}</span>{% endif %}</h1>
+    <h1 class="h2 text-uppercase mb-0">Магазин</h1>
+    {% if category %}<span class="breadcrumb-item active">{{ category.name }}</span>{% endif %}
   </div>
   <div class="col-lg-6 text-lg-right">
     <nav aria-label="breadcrumb">
