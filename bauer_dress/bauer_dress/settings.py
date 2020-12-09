@@ -127,8 +127,12 @@ WSGI_APPLICATION = 'bauer_dress.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bauerdress',
+	    'USER': 'kirill',
+	    'PASSWORD': 'a18b10c01',
+	    'HOST': 'localhost',
+	    'PORT': '5432'
     }
 }
 
