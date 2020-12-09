@@ -11,14 +11,6 @@ class ReviewForm(forms.Form):
 
 
 
-
-# class PriceFilterForm(django_filters.FilterSet):
-#     sort_by_price = django_filters.CharFilter(field_name='price', method='filter_price')
-
-#     def filter_price(self, queryset, name, value):
-#         return queryset.filter(stock__gt=0).order_by('-price')
-
-
 class ListFilterForm(django_filters.FilterSet):
     rent = django_filters.BooleanFilter(field_name='rent', widget=forms.CheckboxInput)
 

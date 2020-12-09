@@ -80,7 +80,7 @@ def product_list(request, category_slug=None, tag_slug=None):
 
 
 
-	paginator = Paginator(f.qs, 12)
+	paginator = Paginator(f.qs, 5)
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
 	
