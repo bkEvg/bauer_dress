@@ -70,7 +70,7 @@
               </div>
             </div>
             <div class="row">
-              {% for product in filter.qs %}
+              {% for product in page_obj %}
                 <!-- PRODUCT-->
                 <div class="col-lg-4 col-sm-6 mb-30">
                   <div class="product text-center">
@@ -108,7 +108,7 @@
                       <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
                   {% endif %}
                   <li class="page-item active">
-                    <a class="page-link" href="?page=1{{ page_obj.number }}">{{ page_obj.number }}</a>
+                    <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
                   </li>
                   {% if page_obj.has_next %}
                       <a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>

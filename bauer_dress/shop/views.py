@@ -79,11 +79,15 @@ def product_list(request, category_slug=None, tag_slug=None):
 	f = ListFilterForm(request.GET, queryset=products)
 
 
-
-	paginator = Paginator(f.qs, 5)
+	paginator = Paginator(f.qs, 9)
 	page_number = request.GET.get('page')
-	page_obj = paginator.get_page(page_number)
-	
+
+	try:
+		page_obj = paginator.get_page(page_number)
+	except PageNotAnInteger:
+		page_obj = paginator.page(1)
+	except EmptyPage:
+		page_obj = paginator.page(paginator.num_pages)
 
 	return render(request, 'shop/product/list_shop.html', {
 		'page_obj': page_obj,

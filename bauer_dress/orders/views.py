@@ -30,7 +30,7 @@ def order_create(request):
 				OrderItem.objects.create(order=order,
 										product=item['product'],
 										product_set=item['product_set'],
-										price=item['product_set'].price,
+										price=item['price'],
 										quantity=item['quantity'],
 										size = item['product_set'].size_set,
 										color = item['color'])
