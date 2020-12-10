@@ -18,12 +18,15 @@
 {% block content %}
     <h1>Заказ {{ order.id }}</h1>
     <ul class="object-tools">
+        {% if url %}
+        <li>
+            <a href="{{ url }}">Вернуться</a>
+        </li>
+        {% endif %}
+        
         <li>
             <a href="#" onclick="window.print();">Распечатать Заказ</a>
         </li>
-        {% if url %}
-            <a href="{{ url }}">Вернуться</a>
-        {% endif %}
     </ul>
     <table>
         <tr>

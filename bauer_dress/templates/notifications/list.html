@@ -1,7 +1,11 @@
-
-<ul class="notifications">
-  {% for notice in notifications %}
-    {% include 'notifications/notice.html' %}
-  {% endfor %}
-</ul>
-  
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="col-lg-12">
+    <ul class="notifications">
+      {% for notice in notifications %}
+        {% include 'notifications/notice.html' %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

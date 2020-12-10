@@ -37,6 +37,12 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 0;left: auto;">
       {% if user.is_authenticated %}
+      {% if user.is_staff %}
+      <a class="dropdown-item" href="{% url 'notifications:all' %}">
+        Уведомления
+      </a>
+      <div class="dropdown-divider"></div>
+      {% endif %}
       <a class="dropdown-item" href="{% url 'account_email' %}">Настройка E-mail</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="{% url 'account_logout' %}">
@@ -62,7 +68,7 @@
 
       {% with objects=user.notifications.unread %}
       {% for notification in objects %}
-      <a class="dropdown-item" href="{% url 'shop:notified_obj' notification.action_object.id notification.id %}">
+      <a class="dropdown-item" href="{% url 'shop:notified_obj' notification.id notification.action_object %}">
         {{ notification.verb }}
       </a>
       <div class="dropdown-divider"></div>

@@ -14,6 +14,9 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.cache import cache_page
 from orders.models import Order
 from notifications.models import Notification
+from django.contrib.auth.models import Group
+from notifications.signals import notify
+from django.urls import reverse
 
 
 @cache_page(60 * 15)
@@ -117,6 +120,8 @@ def rate_product(request, id):
 	url = product.get_absolute_url()
 	form = ReviewForm(request.POST)
 	if form.is_valid():
+		user = request.user
+		admins = Group.objects.get(name='staff')
 		cd = form.cleaned_data
 		if cd['rating']:
 			review = Review.objects.create(user=request.user, product=product, name=cd['name'], review=cd['review'], rate=cd['rating'])
@@ -124,6 +129,8 @@ def rate_product(request, id):
 			review = Review.objects.create(user=request.user, product=product, name=cd['name'], review=cd['review'], rate=0)
 		review.save()
 		messages.success(request, message='Ваш отзыв опубликован. Спасибо!')
+		notify.send(user, recipient=admins, verb=f'Добавлен отзыв для {product.name} (звезда: {review.rate})')
+
 	return redirect(url)
 
 
@@ -207,11 +214,16 @@ def review_response(request, review_id):
 	return redirect(url)
 
 @staff_member_required
-def admin_order_detail(request, order_id, notification_id):
-	order = get_object_or_404(Order, id=order_id)
-	coupon = order.coupon
+def notification_handler(request, notification_id, order_id=None):
+	order = None
+	if not order_id:
+		order = get_object_or_404(Order, id=order_id)
+		coupon = order.coupon
 	notification = get_object_or_404(Notification, id=notification_id)
 	notification.mark_as_read()
 	url = request.META["HTTP_REFERER"]
-	
-	return render(request, 'admin/orders/order/detail.html', {'order': order, 'url': url})
+
+	if order:
+		return render(request, 'admin/orders/order/detail.html', {'order': order, 'url': url})
+	else:
+		return redirect(url)
