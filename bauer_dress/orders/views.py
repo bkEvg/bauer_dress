@@ -13,10 +13,15 @@ from django.core.mail import send_mail
 from email_sub.models import Subscription
 from django.core.exceptions import ObjectDoesNotExist
 from .tasks import order_created
+from notifications.signals import notify
+from django.contrib.auth.models import Group
+
 
 
 def order_create(request):
 	cart = Cart(request)
+	user = request.user
+	admins = Group.objects.get(name='staff')
 	coupon_apply_form = CouponApplyForm()
 	if request.method == 'POST':
 		form = OrderCreateForm(request.POST)
@@ -38,13 +43,8 @@ def order_create(request):
 				Subscription.objects.get(email=order.email)
 			except ObjectDoesNotExist:
 				Subscription.objects.create(name=order.first_name, surname=order.last_name, email=order.email)
-			# send email with html template
-			# subject = 'Заказ #{}'.format(order.id)
-			# html = loader.render_to_string('orders/order/mail2.html', context={
-			# 	'order': order,
-			# 	'cart': cart})
-			# mail_sent = send_mail(subject, None, settings.EMAIL_HOST_USER, [order.email, settings.MAIL], html_message=html)
 			#clearing cart and coupon
+			notify.send(user, recipient=admins, action_object=order, verb=f'Заказ #{order.id}')
 			order_created.delay(order.id)
 			cart.clear()
 			if cart.coupon:

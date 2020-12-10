@@ -1,4 +1,6 @@
 {% load static %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
 <ul class="navbar-nav ml-auto">
   <li class="nav-item">
     <a class="nav-link" href="{% url 'cart:cart_detail' %}">
@@ -50,4 +52,25 @@
       {% endif %}
     </div>
   </li>
+  {% if user.is_staff %}
+  {% if unread_count %}
+  <li class="nav-item dropdown">
+    <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {% live_notify_badge badge_class="badge bg-dark text-white" %}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 0;left: auto;">
+
+      {% with objects=user.notifications.unread %}
+      {% for notification in objects %}
+      <a class="dropdown-item" href="{% url 'shop:notified_obj' notification.action_object.id notification.id %}">
+        {{ notification.verb }}
+      </a>
+      <div class="dropdown-divider"></div>
+      {% endfor %}
+      {% endwith %}
+
+    </div>
+  </li>
+  {% endif %}
+  {% endif %}
 </ul>

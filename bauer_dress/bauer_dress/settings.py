@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'email_sub.apps.EmailSubConfig',
     'django_simple_coupons',
     'ckeditor',
+    'notifications',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -111,6 +112,7 @@ TEMPLATES = [
                 'information.context_processors.categories',
                 'cart.context_processors.cart',
                 'wishlist.context_processors.wishlist',
+                'shop.context_processors.get_unread',
             ],
         },
     },
@@ -220,3 +222,5 @@ LOGIN_REDIRECT_URL = 'shop:index'
 FILTERS_EMPTY_CHOICE_LABEL = 'Выберите...'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DJANGO_NOTIFICATIONS_CONFIG = { 'order_id': None}

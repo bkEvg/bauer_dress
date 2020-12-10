@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from promotion import views as promo_views
+from orders import views as order_view
 
 
 app_name = 'shop'
@@ -13,6 +14,7 @@ urlpatterns = [
     #path('expensive-to-cheap/', views.expensive_product_list, name='sorting_expensive'),
     path('rate/<int:id>/', views.rate_product, name='rate'),
     path('categories/<category_slug>/', views.product_list, name='index_by_category'),
+    path('notification/<order_id>/<notification_id>/', views.admin_order_detail, name='notified_obj'),
     #path('material/<material_slug>/', views.product_list, name='index_by_model'),
     #path('models/<model_slug>/', views.product_list, name='index_by_material'),
     path('tags/<tag_slug>/', views.product_list, name='index_by_tag'),

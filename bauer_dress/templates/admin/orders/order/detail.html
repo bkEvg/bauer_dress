@@ -21,6 +21,9 @@
         <li>
             <a href="#" onclick="window.print();">Распечатать Заказ</a>
         </li>
+        {% if url %}
+            <a href="{{ url }}">Вернуться</a>
+        {% endif %}
     </ul>
     <table>
         <tr>

@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from shop import views as shop_view
+import notifications.urls
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +30,7 @@ urlpatterns = [
     path('promo/', include('promotion.urls')),
     path('wishlist/', include('wishlist.urls')),
     path('accounts/', include('allauth.urls')),
+    path('notifications/', include(notifications.urls, namespace='notifications')),
     path('', include('shop.urls')),
 ]
 handler404 = 'shop.views.error404'
