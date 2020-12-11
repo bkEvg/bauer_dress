@@ -34,36 +34,46 @@
       <div class="container p-0">
         <div class="row">
           <!-- SHOP SIDEBAR-->
-          <div class="col-lg-3 order-2 order-lg-1">
-            <div class="py-2 px-4 bg-dark text-white mb-3">
-              <strong class="small text-uppercase font-weight-bold">Фильтр</strong>
+          <div class="accordion mb-3" id="accordionExample">
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Фильтр
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  
+                  <form method="get">
+                    <div class="py-2 bg-light">
+                      <strong class="small text-uppercase font-weight-bold">Тип товара</strong>
+                    </div>
+                    {% render_field filter.form.category class="js-example-placeholder-multiple form-control custom-select" %}
+                    <div class="py-2 bg-light">
+                      <strong class="small text-uppercase font-weight-bold">Цена</strong>
+                    </div>
+                    {% render_field filter.form.price_to__gt class="form-control" placeholder="От" style="border-bottom: none;" %}
+                    {% render_field filter.form.price_from__lt class="form-control" placeholder="До" %}
+                    <div class="py-2 bg-light">
+                      <strong class="small text-uppercase font-weight-bold">Материал</strong>
+                    </div>
+                    {% render_field filter.form.material class="js-example-placeholder-multiple form-control custom-select" %}
+                    <div class="py-2 bg-light">
+                      <strong class="small text-uppercase font-weight-bold">Возраст</strong>
+                    </div>
+                    {% render_field filter.form.tag class="js-example-placeholder-multiple form-control custom-select" %}
+                    {% block filter_form_extra %}{% endblock %}
+                    <div class="col-sm-12 pl-sm-0 p-0 pt-15">
+                      <button class="btn btn-dark btn btn-block h-100 d-flex align-items-center justify-content-center px-0" type="submit">Применить</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-            <form method="get">
-              <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Тип товара</strong>
-              </div>
-              {% render_field filter.form.category class="js-example-placeholder-multiple form-control custom-select" %}
-              <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Цена</strong>
-              </div>
-              {% render_field filter.form.price_to__gt class="form-control" placeholder="От" style="border-bottom: none;" %}
-              {% render_field filter.form.price_from__lt class="form-control" placeholder="До" %}
-              <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Материал</strong>
-              </div>
-              {% render_field filter.form.material class="js-example-placeholder-multiple form-control custom-select" %}
-              <div class="py-2 bg-light">
-                <strong class="small text-uppercase font-weight-bold">Возраст</strong>
-              </div>
-              {% render_field filter.form.tag class="js-example-placeholder-multiple form-control custom-select" %}
-              {% block filter_form_extra %}{% endblock %}
-              <div class="col-sm-12 pl-sm-0 p-0 pt-15">
-                <button class="btn btn-dark btn btn-block h-100 d-flex align-items-center justify-content-center px-0" type="submit">Применить</button>
-              </div>
-            </form>
           </div>
           <!-- SHOP LISTING-->
-          <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
+          <div class="col-lg-12 order-1 order-lg-2 mb-5 mb-lg-0">
             <div class="row mb-3 align-items-center">
               <div class="col-lg-6 mb-2 mb-lg-0">
                 <p class="text-small text-muted mb-0">Показано {{ page_obj.end_index }} из {{ filter.qs|length }} товаров</p>
@@ -72,7 +82,7 @@
             <div class="row">
               {% for product in page_obj %}
                 <!-- PRODUCT-->
-                <div class="col-lg-4 col-sm-6 mb-30">
+                <div class="col-lg-3 col-sm-6 mb-30">
                   <div class="product text-center">
                     <div class="mb-3 position-relative">
                       {% if product.discount %}
