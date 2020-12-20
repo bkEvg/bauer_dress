@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django_simple_coupons',
     'ckeditor',
     'notifications',
+    'profiles.apps.ProfilesConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -67,7 +68,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,12 +76,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'unix:/tmp/memcached.sock',
-    }
-}
 
 AUTHENTICATION_BACKENDS = [
 
@@ -177,10 +171,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 COUPON_SESSION_ID = 'coupon_id'
 CART_SESSION_ID = 'cart'
@@ -222,5 +216,3 @@ LOGIN_REDIRECT_URL = 'shop:index'
 FILTERS_EMPTY_CHOICE_LABEL = 'Выберите...'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-DJANGO_NOTIFICATIONS_CONFIG = { 'order_id': None}

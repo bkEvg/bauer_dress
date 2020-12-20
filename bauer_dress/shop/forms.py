@@ -42,3 +42,5 @@ class ReviewResponseForm(forms.ModelForm):
     class Meta:
         model = ReviewResponse
         fields = ['response']
+
+
