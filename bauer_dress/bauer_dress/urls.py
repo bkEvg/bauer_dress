@@ -31,7 +31,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('notifications/', include(notifications.urls, namespace='notifications')),
     path('', include('shop.urls')),
-]
+ ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 handler404 = 'shop.views.error404'
 handler500 = 'shop.views.error500'
 
