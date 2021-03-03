@@ -38,6 +38,12 @@
               <h2 class="h5 text-uppercase mb-4">{{ promotion.second_page.title }}</h2>
           </header>
           <div class="row">
+<!--            <div class="col-md-4">
+                <a class="category-item" href="/categories/povsednevnaya-odezhda/">
+                    <img class="img-fluid" src="{{ promotion.second_page.image_for_second_cat.url }}" alt="{{ promotion.second_page.alt_for_image_no_2 }}">
+                    <strong class="category-item-title">Повседневная одежда</strong>
+                </a>
+            </div>-->
             <div class="col-md-6 mb-4 mb-md-0">
                 <a class="category-item" href="{{ promotion.second_page.first_category.get_absolute_url }}">
                     <img class="img-fluid" src="{{ promotion.second_page.image_for_first_cat.url }}" alt="{{ promotion.second_page.alt_for_image_no_1 }}">

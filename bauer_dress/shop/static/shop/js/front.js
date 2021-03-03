@@ -13,27 +13,37 @@ $(function () {
     /* ===============================================================
          PRODUCT SLIDER
       =============================================================== */
-      $('.owl-carousel-product').owlCarousel({
-          loop:true,
-          margin:10,
-          responsiveClass:true,
-          lazyLoad:true,
-          responsive:{
-              0:{
-                  items:1,
-                  nav:false
-              },
-              600:{
-                  items:1,
-                  nav:false
-              },
-              1000:{
-                  items:1,
-                  nav:false,
-                  loop:false
-              }
-          }
-      });
+      // $('.owl-carousel-product').owlCarousel({
+      //     loop:true,
+      //     margin:10,
+      //     responsiveClass:true,
+      //     thumbsPrerendered: true,
+      //     lazyLoad:true,
+      //     responsive:{
+      //         0:{
+      //             items:1,
+      //             nav:false
+      //         },
+      //         600:{
+      //             items:1,
+      //             nav:false
+      //         },
+      //         1000:{
+      //             items:1,
+      //             nav:false,
+      //             loop:false
+      //         }
+      //     }
+      // });
+      $('.product-slider').owlCarousel({
+        items: 1,
+        thumbs: true,
+        thumbImage: false,
+        thumbsPrerendered: true,
+        responsiveClass:true,
+        thumbContainerClass: 'owl-thumbs',
+        thumbItemClass: 'owl-thumb-item'
+    });
 
 
     /* ===============================================================

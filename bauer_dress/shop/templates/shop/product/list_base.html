@@ -46,10 +46,13 @@
                 <div class="accordion-body">
                   
                   <form method="get">
+                    {% if category %}
+                    {% else %}
                     <div class="py-2 bg-light">
                       <strong class="small text-uppercase font-weight-bold">Тип товара</strong>
                     </div>
                     {% render_field filter.form.category class="js-example-placeholder-multiple form-control custom-select" %}
+                    {% endif %}
                     <div class="py-2 bg-light">
                       <strong class="small text-uppercase font-weight-bold">Цена</strong>
                     </div>

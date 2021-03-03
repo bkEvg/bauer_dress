@@ -6,7 +6,7 @@ from django.utils import timezone
 from cart.forms import CartAddProductForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
-from .forms import ListFilterForm, ReviewResponseForm, ForRentFilterForm
+from .forms import ListFilterForm, ReviewResponseForm, ForRentFilterForm, CategoryFilterForm
 from promotion.models import Promotion
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.admin.views.decorators import staff_member_required
@@ -17,6 +17,7 @@ from notifications.models import Notification
 from django.contrib.auth.models import Group
 from notifications.signals import notify
 from django.urls import reverse
+from django.db.models import Q
 
 
 @cache_page(60 * 15)
@@ -74,17 +75,18 @@ def product_list(request, category_slug=None, tag_slug=None):
 	tag = None
 	categories = Category.objects.all()
 	products = Product.objects.filter(stock__gt=0).order_by('-updated')
+	f = ListFilterForm(request.GET, queryset=products)
 	if category_slug:
 		category = get_object_or_404(Category, slug=category_slug)
 		products = Product.objects.filter(stock__gt=0, category=category)
+		f = CategoryFilterForm(request.GET, queryset=products)
 
 	if tag_slug:
 		tag = get_object_or_404(Tag, slug=tag_slug)
 		products = Product.objects.filter(stock__gt=0, tag=tag)
-	f = ListFilterForm(request.GET, queryset=products)
 
 
-	paginator = Paginator(f.qs, 9)
+	paginator = Paginator(f.qs, 16)
 	page_number = request.GET.get('page')
 
 	try:
@@ -101,6 +103,28 @@ def product_list(request, category_slug=None, tag_slug=None):
 		'tag': tag,
 	})
 	
+@cache_page(60 * 15)
+def dresses(request):
+	products = Product.objects.filter(Q(category__name='Повседневные платья') | Q(category__name='Праздничные платья'), stock__gt=0).order_by('-updated')
+	f = ListFilterForm(request.GET, queryset=products)
+
+
+	paginator = Paginator(f.qs, 16)
+	page_number = request.GET.get('page')
+
+	try:
+		page_obj = paginator.get_page(page_number)
+	except PageNotAnInteger:
+		page_obj = paginator.page(1)
+	except EmptyPage:
+		page_obj = paginator.page(paginator.num_pages)
+
+	return render(request, 'shop/product/dresses_list.html', {
+		'page_obj': page_obj,
+		'filter': f
+	})	
+
+
 @cache_page(60 * 15)
 def for_rent(request):
 	products = Product.objects.filter(stock__gt=0, rent=True).order_by('-updated')

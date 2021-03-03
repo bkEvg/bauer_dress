@@ -30,7 +30,8 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{% static 'shop/vendor/bootstrap/css/bootstrap.min.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <!-- cookiealert styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
     <!-- Lightbox-->
     <link rel="stylesheet" href="{% static 'shop/vendor/lightbox2/css/lightbox.min.css' %}">
     <!-- Bootstrap select-->
@@ -66,6 +67,13 @@
 
       {% block content %}
       {% endblock %}
+      <div class="alert text-center cookiealert" role="alert">
+          <b>Вам нравятся cookies?</b> &#x1F36A; Мы используем файлы cookie, чтобы вам было удобнее пользоваться нашим сайтом. <a href="https://cookiesandyou.com/" target="_blank">Узнать больше</a>
+
+          <button type="button" class="btn btn-primary btn-sm acceptcookies">
+              Принимаю
+          </button>
+      </div>
       <footer class="bg-dark text-white">
         <div class="container py-4">
           <div class="row py-5">
@@ -107,6 +115,10 @@
         </div>
       </footer>
       <!-- JavaScript files-->
+
+      <!-- Include cookiealert script -->
+      <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+
       <script src="{% static 'shop/vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'shop/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
       <script src="{% static 'shop/vendor/lightbox2/js/lightbox.min.js' %}"></script>

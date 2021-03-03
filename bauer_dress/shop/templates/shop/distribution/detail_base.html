@@ -9,14 +9,35 @@
     {% endblock %}
 {% endblock %}
 {% block content %}
+            <!-- <div class="owl-carousel owl-carousel-product owl-theme">
+              {% for images in product.images.all %}
+              <div class="item"><img class="img-fluid owl-lazy" src="{{ images.image.url }}" data-src="{{ images.image.url }}" alt="{{ product.images.alt }}"></div>
+              {% endfor %}
+            </div> -->
   <section class="py-5">
     <div class="container">
       <div class="row mb-5">
         <div class="col-lg-6">
-          <div class="owl-carousel owl-carousel-product owl-theme">
-            {% for images in product.images.all %}
-            <div class="item"><img class="img-fluid owl-lazy" src="{{ images.image.url }}" data-src="{{ images.image.url }}" alt="{{ product.images.alt }}"></div>
-            {% endfor %}
+          <!-- PRODUCT SLIDER-->
+          <div class="row m-sm-0">
+            <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0">
+              <div class="owl-thumbs d-flex flex-row flex-sm-column" data-slider-id="1">
+                {% for images in product.images.all %}
+                  <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0">
+                    <img class="w-100" src="{{ images.image.url }}" alt="{{ images.alt }}">
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-sm-10 order-1 order-sm-2">
+              <div class="owl-carousel product-slider" data-slider-id="1">
+                {% for images in product.images.all %}
+                  <a class="d-block" href="{{ images.image.url }}" data-lightbox="product" title="{{ images.alt }}">
+                    <img class="img-fluid" src="{{ images.image.url }}" alt="{{ images.alt }}">
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
 

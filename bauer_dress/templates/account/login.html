@@ -50,24 +50,29 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 		<form class="login" method="POST" action="{% url 'account_login' %}">
 		  {% csrf_token %}
 		  <div class="col-lg-6 form-group">
-		  	<!-- <label class="text-small text-uppercase" for="{{ field.id_for_label }}">E-mail</label>
-	        {% with WIDGET_ERROR_CLASS='is-invalid' WIDGET_REQUIRED_CLASS='required' %}
-	        	{% render_field form.login class="form-control form-control-lg " placeholder="E-mail адрес" %}
-	        {% endwith %}
-	      </div>
-	      <div class="col-lg-6 form-group">
-	      	<label class="text-small text-uppercase" for="{{ field.id_for_label }}">Пароль</label>
-	        {% with WIDGET_ERROR_CLASS='is-invalid' WIDGET_REQUIRED_CLASS='required' %}
-	        	{% render_field form.password class="form-control form-control-lg " placeholder="Пароль" %}
-	        {% endwith %}
-	      </div>
-	      <div class="col-lg-6 form-group">
-	        {% with WIDGET_ERROR_CLASS='is-invalid' WIDGET_REQUIRED_CLASS='required' %}
-	        	{% render_field form.remember %}
-	        {% endwith %}
-	      	<label class="text-small text-uppercase" for="{{ field.id_for_label }}">Запомнить меня</label>
-	      </div> -->
 	      {{ form|crispy }}
+		  <label><input type="checkbox" class="password-checkbox" onclick="show_hide_password(this);"> Показать пароль</label>
+		  <script type="text/javascript">
+		  	
+function show_hide_password(target){
+
+	var input = document.getElementById('id_password');
+
+	if (input.getAttribute('type') == 'password') {
+
+		input.setAttribute('type', 'text');
+
+	} else {
+
+		input.setAttribute('type', 'password');
+
+	}
+
+	return false;
+
+}
+		  </script>
+
 	      <div class="form-group mb-5">
 		    <button class="btn btn-dark" type="submit">
 		    	{% trans "Sign In" %}

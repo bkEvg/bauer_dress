@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block seo %}
-  <title>Спасибо за покупку! | Интернет-магазин Bauer Dress</title>
+  <title>Не получилось! | Интернет-магазин Bauer Dress</title>
   <meta name="description" content=""/>
 {% endblock %}
 {% block content %}
@@ -12,7 +12,7 @@
           <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
               <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0">Спасибо</h1>
+                <h1 class="h2 text-uppercase mb-0">Упс...</h1>
               </div>
               <div class="col-lg-6 text-lg-right">
                 <nav aria-label="breadcrumb">
@@ -20,7 +20,7 @@
                     <li class="breadcrumb-item"><a href="{% url 'shop:index' %}">Главная</a></li>
                     <li class="breadcrumb-item"><a href="{% url 'cart:cart_detail' %}">Корзина</a></li>
                     <li class="breadcrumb-item"><a href="{% url 'orders:order_create' %}">Оформление</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Спасибо</li>
+                    <li class="breadcrumb-item active" aria-current="page">Ошибка</li>
                   </ol>
                 </nav>
               </div>
@@ -29,8 +29,8 @@
         </section>
         <section class="py-5">
           <!-- BILLING ADDRESS-->
-          <h2 class="h5 text-uppercase mb-4">Ваш платеж успешно принят!</h2>
-          <h5>Проверьте Ваш почтовый ящик, который вы указали при оформлении заказа, и сверьте заказ!</h5>
+          <h2 class="h5 text-uppercase mb-4">Что-то не так</h2>
+          <h5>Если вы не отменяли платеж, то свяжитесь с нами, мы все решим!</h5>
         </section>
     </div>
 {% endblock %}

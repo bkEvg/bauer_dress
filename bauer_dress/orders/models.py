@@ -23,6 +23,7 @@ class Order(models.Model):
 	                                null=True,
 	                                blank=True,
 	                                verbose_name='Купон')
+	payment_id = models.CharField(max_length=1000, verbose_name='ID Платежа')
 	
 
 	class Meta:

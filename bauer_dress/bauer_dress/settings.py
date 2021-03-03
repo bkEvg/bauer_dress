@@ -28,7 +28,8 @@ SECRET_KEY = '*bakp!s@j#f0&4&%ihm=7!mx-06qh@evs!%fb8d6fx0__s1*0#'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost'
+    'localhost',
+    '*'
 ]
 
 # prod settings

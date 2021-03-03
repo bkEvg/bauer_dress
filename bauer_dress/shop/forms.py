@@ -24,6 +24,17 @@ class ListFilterForm(django_filters.FilterSet):
             'category': ['exact']
         }
 
+class CategoryFilterForm(django_filters.FilterSet):
+    rent = django_filters.BooleanFilter(field_name='rent', widget=forms.CheckboxInput)
+
+    class Meta:
+        model = Product
+        fields = {
+            'price_from': ['lt'],
+            'price_to': ['gt'],
+            'material': ['exact'],
+            'tag': ['exact']
+        }
 
 class ForRentFilterForm(django_filters.FilterSet):
 
