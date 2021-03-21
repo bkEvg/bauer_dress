@@ -89,6 +89,11 @@ $('.size-slider').owlCarousel({
     items:4
 });
 
+var btn=document.getElementById('btn-change');
+btn.addEventListener('click', function() {
+  document.getElementById('alert-none').className='col-12 mt-2';
+});
+
 
 
 document.addEventListener("DOMContentLoaded", function() {

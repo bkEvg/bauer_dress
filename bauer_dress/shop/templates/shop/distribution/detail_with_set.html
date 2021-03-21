@@ -26,7 +26,13 @@
 	</div>
 {% endblock %}
 
-{% block form_action %}{% url 'cart:cart_add' product.id set.price set.slug %}{% endblock %}
+
+{% block form_open %}
+<form action="{% url 'cart:cart_add' product.id set.price set.slug %}" method="POST">
+    {% csrf_token %}
+{% endblock %}
+
+{% block form_close %}</form>{% endblock %}
 
 {% block cart_add_button %}
 <button class="btn btn-dark btn btn-block h-100 d-flex align-items-center justify-content-center px-0" type="submit">В корзину</button>

@@ -53,8 +53,7 @@
               {{ product.description }}
             {% endautoescape %}
           </p>
-          <form action="{% block form_action %}{% endblock %}" method="POST">
-            {% csrf_token %}
+          {% block form_open %}{% endblock %}
             {% for hidden_field in cart_product_form.hidden_fields %}
               {{ hidden_field }}
             {% endfor %}
@@ -366,9 +365,14 @@
               </div>
             </div>
             <div class="row align-items-stretch">
-                <div class="col-lg-12 pr-sm-1 pt-15 d-flex" style='padding-top: 15px;'>
-                    {% block sets %}{% endblock %}
+              <div id="alert-none" class="col-12 mt-2 pt-3 d-none">
+                <div  class="alert alert-danger" role="alert">
+                  Выберете необходимый размер.
                 </div>
+              </div>
+              <div class="col-lg-12 pr-sm-1 pt-15 d-flex" style='padding-top: 15px;'>
+                  {% block sets %}{% endblock %}
+              </div>
             </div>
             <div class="row align-items-stretch mb-4">
               <div class="col-sm-6 pr-sm-0" style='padding-top: 15px;'>
@@ -411,7 +415,7 @@
                 </li>
               {% endif %}
             </ul>
-          </form>
+          {% block form_close %}{% endblock %}
 
         </div>
       </div>
