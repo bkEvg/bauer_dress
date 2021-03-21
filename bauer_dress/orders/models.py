@@ -8,6 +8,19 @@ import json
 
 
 class Order(models.Model):
+
+	PENDING = 'pending'
+	WAITING_FOR_CAPTURE = 'waiting_for_capture'
+	SUCCEEDED = 'succeeded'
+	CANCELED = 'canceled'
+
+	STATUS_CHOICES = (
+		(PENDING, 'В процессе'),
+		(WAITING_FOR_CAPTURE, 'В процессе подтверждения'),
+		(SUCCEEDED, 'Принято'),
+		(CANCELED, 'Отменено'),
+	)
+
 	paid = models.BooleanField(default=False, verbose_name='Оплачено')
 	first_name = models.CharField(max_length=50, verbose_name='Имя')
 	last_name = models.CharField(max_length=50, verbose_name='Фамилия')
@@ -24,7 +37,7 @@ class Order(models.Model):
 	                                blank=True,
 	                                verbose_name='Купон')
 	payment_id = models.CharField(max_length=1000, verbose_name='ID Платежа')
-	
+	status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=PENDING, verbose_name='Статус')
 
 	class Meta:
 		ordering = ('created',)

@@ -101,7 +101,7 @@ def order_create(request):
 			    },
 			    "confirmation": {
 			      "type": "redirect",
-			      "return_url": "https://b6dc82179c04.ngrok.io{}".format(reverse('orders:thank_you', args=[order.id]))
+			      "return_url": "https://f67cc52b570c.ngrok.io{}".format(reverse('orders:thank_you', args=[order.id]))
 			    },
 			    "description": "Заказ №%s" % order.id
 			}, idempotence_key)

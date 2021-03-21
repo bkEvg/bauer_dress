@@ -17,3 +17,12 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
+
+app.conf.beat_schedule = {
+    # Executes every Monday morning at 7:30 a.m.
+    'update-order-payment-status': {
+        'task': 'tasks.payment_status_refresher',
+        'schedule': crontab(),
+    },
+}

@@ -7,6 +7,8 @@ from django.template import loader
 from cart.cart import Cart
 from django.conf import settings
 
+from yookassa import Payment
+
 @app.task(bind=True, default_retry_delay=5*60)
 def order_created(self, order_id):
 	"""
@@ -21,3 +23,19 @@ def order_created(self, order_id):
 		return order_sent
 	except Exception as exp:
 		raise self.retry(exc=exc, countdown=60)
+
+@app.task(bind=True, default_retry_delay=3*3600)
+def payment_status_refresher(self):
+	orders = Order.objects.all()
+	for order in orders:
+		try:
+			payment = Payment.find_one(order.payment_id)
+			order.status = payment.status
+			if order.status == 'canceled' | 'pending':
+				order.paid = False
+			else:
+				order.paid = True
+			order.save()
+		except Exception:
+			pass
+
