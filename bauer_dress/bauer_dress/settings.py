@@ -125,11 +125,11 @@ WSGI_APPLICATION = 'bauer_dress.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bauerdress',
-	    'USER': 'kirill',
-	    'PASSWORD': 'a18b10c01',
-	    'HOST': 'localhost',
-	    'PORT': '5432'
+        'NAME': 'kirillbauer',
+        'USER': 'kirillbauer',
+        'PASSWORD': 'a18b10c01',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
